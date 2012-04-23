@@ -136,3 +136,57 @@ CREATE INDEX "GESAC_SYS_LOG_TABL_ENTIDAD_ACCION_FECHA"
   ON "CPSAA"."GESAC_SYS_LOG_TABL"
   USING btree
   ("SCSLT_IDE_LOG_TABL_K");
+
+--
+
+ALTER TABLE "CPSAA"."GESAC_MAE_PROC" ADD COLUMN "SCMPC_NOM_NEGO" character varying(80);
+
+
+
+---------Prefabricados
+ update "CPSAA"."GESAC_MAE_PROC"   set "SCMPC_NOM_NEGO"='Prefabricados'   where  
+
+ "SCMPC_IDE_PROC_K"  in
+
+ (select   proceBase."SCMPC_IDE_PROC_K"  from   "CPSAA"."GESAC_MAE_PROC"  proc  inner join  "CPSAA"."GESAC_MAE_PROC"  proceBase
+  on proc."SCMPC_IDE_PROC_K"=proceBase."SCMPC_IDE_PROC_BASE_K" 
+ 
+  where  (proc."SCMPC_NOM_PROC"='Almac. y Despacho de Prefabricados' ) or
+
+	  (proc."SCMPC_NOM_PROC"='Elaboración de productos prefabricados' )
+
+  );
+
+--------Concreto
+update "CPSAA"."GESAC_MAE_PROC"   set "SCMPC_NOM_NEGO"='Concreto'   where  
+
+ "SCMPC_IDE_PROC_K"  in
+
+ (select   proceBase."SCMPC_IDE_PROC_K"  from   "CPSAA"."GESAC_MAE_PROC"  proc  inner join  "CPSAA"."GESAC_MAE_PROC"  proceBase
+  on proc."SCMPC_IDE_PROC_K"=proceBase."SCMPC_IDE_PROC_BASE_K" 
+ 
+  where  (proc."SCMPC_NOM_PROC"='[x] Transp. y sumin. de concreto pmz' ) or
+
+	  (proc."SCMPC_NOM_PROC"='[x] Transp. y sumin. de concreto en disp.' ) or
+
+
+	  (proc."SCMPC_NOM_PROC"='Elab., transp. y sumin. de concreto pmz.' ) or
+
+            (proc."SCMPC_NOM_PROC"='Transp., elab. y sumin. de concreto en disp.' ) or
+
+            (proc."SCMPC_NOM_PROC"='Elab., transp. y sumin. de mortero pmz.' ) 
+
+  );
+
+
+  --------Premezclados
+update "CPSAA"."GESAC_MAE_PROC"   set "SCMPC_NOM_NEGO"='Premezclados'   where  
+
+ "SCMPC_IDE_PROC_K"  in
+
+ (select   proceBase."SCMPC_IDE_PROC_K"  from   "CPSAA"."GESAC_MAE_PROC"  proc  inner join  "CPSAA"."GESAC_MAE_PROC"  proceBase
+  on proc."SCMPC_IDE_PROC_K"=proceBase."SCMPC_IDE_PROC_BASE_K" 
+ 
+  where  (proc."SCMPC_NOM_PROC"='Recepción y almacenaje de M.P.' ) or
+
+	  (proc."SCMPC_NOM_PROC"='Zarandeo y chancado de agregados' )   );
