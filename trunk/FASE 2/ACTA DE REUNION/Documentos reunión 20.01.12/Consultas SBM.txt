@@ -1,0 +1,30 @@
+CASO 1:
+
+ID Lote: 33215
+
+Estado lote: No conforme
+
+Estado tratamiento de Resistencia a compresión 28 días: conforme
+
+Todos los demás ensayos: conformes
+
+1. ¿El estado del lote se actualiza manualmente?, dado que todos los ensayos son conformes, y el estado del lote es "no conforme".
+
+2. De la pregunta 1, eso implicaría que tambien solicitan que haya un cambio de estado automático para la funcionalidad "Administrar lotes"?
+
+3. ¿En cual estado nos basamos para generar el PNC? 
+¿en el del lote? 
+¿en el estado de tratamiento del ensayo resistencia a compresión 28 días? 
+o en cualquiera de los ensayos que tenga como estado de tratamiento "no conforme"?
+
+
+
+CASO 2:
+
+ID Lote: 29203
+Estado lote: No conforme
+Resistencia a compresión 28 días: conforme
+Variación dimensional: No conforme
+
+
+
