@@ -456,3 +456,5 @@ update "CPSAA"."GESAC_MAE_TURN" set "SCMTU_COC_EST" = 'ACT';
 alter table "CPSAA"."GESAC_MAE_LINE_PROD" add "SCMLP_COC_EST" character varying(3);
 
 update "CPSAA"."GESAC_MAE_LINE_PROD" set "SCMLP_COC_EST" = 'ACT';
+
+alter table "CPSAA"."GESAC_MAE_TIPO_ENSA" add "SCMTE_FLG_REP_PRO_PON" character (1) NOT NULL DEFAULT 'N'::bpchar;
