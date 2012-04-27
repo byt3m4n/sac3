@@ -1,0 +1,10 @@
+Usuario: csti_1
+Clave: csti1211
+
+Primero SE16N Buscar tabla MKPF Colocar el ID lote en el campo REFERENCIA
+Me listará el documento de material, abro una nueva ventana y escribo MIGO (en la parte superior izquierda), en el Documento de Material escribo el que copie en la anterior ventana.
+
+Verifico el almacen, la cantidad, y en la pestaña SE, el estado.
+
+MMBE: Verificar los movimientos del material.
+
