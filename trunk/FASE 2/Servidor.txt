@@ -1,0 +1,25 @@
+TOMCAT
+------
+
+192.168.10.3:8080/manager/html
+
+usuario: x
+clave: x
+
+
+ACCESO REMOTO
+-------------
+
+192.168.10.3
+
+usuario: Administrator
+clave: 12345678
+
+
+POSTGRES
+--------
+
+192.168.10.223
+
+usuario: sgr
+clave: 1234
