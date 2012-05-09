@@ -209,3 +209,8 @@ update "CPSAA"."GESAC_MAE_PROC"   set "SCMPC_NOM_NEGO"='Premezclados'   where
   where  (proc."SCMPC_NOM_PROC"='Recepción y almacenaje de M.P.' ) or
 
 	  (proc."SCMPC_NOM_PROC"='Zarandeo y chancado de agregados' )   );
+
+
+INSERT INTO "CPSAA"."GESAC_PAR_SIS"(
+            "SCPAS_IDE_PAR_SIS_K", "SCPAS_NOM_PAR", "SCPAS_GLS_DES", "SCPAS_GLS_VLR")
+    VALUES ( (select max("SCPAS_IDE_PAR_SIS_K") + 1  from  "CPSAA"."GESAC_PAR_SIS") ,'AGRUPARPONDERAR','AGRUPARPONDERAR','24');
