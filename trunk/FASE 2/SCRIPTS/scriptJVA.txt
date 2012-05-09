@@ -68,19 +68,6 @@ CREATE TABLE "CPSAA"."GESAC_CONFIGURACION_ICONO"
 
 --PARAMETROS DEL SISTEMA
 
-INSERT INTO "CPSAA"."GESAC_PAR_SIS"(
-            "SCPAS_IDE_PAR_SIS_K", "SCPAS_NOM_PAR", "SCPAS_GLS_DES", "SCPAS_GLS_VLR")
-    VALUES (63, 'Anio para reinicio de id de Lote y Ensayo', 'Anio para reinicio de id de Lote y Ensayo', '2012');
-
-
-INSERT INTO "CPSAA"."GESAC_PAR_SIS"(
-            "SCPAS_IDE_PAR_SIS_K", "SCPAS_NOM_PAR", "SCPAS_GLS_DES", "SCPAS_GLS_VLR")
-    VALUES (64, 'Numero de turnos a aumentar', 'Numero de turnos a aumentar en la pantalla de Administrar Turnos', '5');
-
-
-
-
-
 
 INSERT INTO "CPSAA"."GESAC_PAR_SIS"(
             "SCPAS_IDE_PAR_SIS_K", "SCPAS_NOM_PAR", "SCPAS_GLS_DES", "SCPAS_GLS_VLR")
