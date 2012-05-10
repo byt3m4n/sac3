@@ -201,3 +201,33 @@ update "CPSAA"."GESAC_MAE_PROC"   set "SCMPC_NOM_NEGO"='Premezclados'   where
 INSERT INTO "CPSAA"."GESAC_PAR_SIS"(
             "SCPAS_IDE_PAR_SIS_K", "SCPAS_NOM_PAR", "SCPAS_GLS_DES", "SCPAS_GLS_VLR")
     VALUES ( (select max("SCPAS_IDE_PAR_SIS_K") + 1  from  "CPSAA"."GESAC_PAR_SIS") ,'AGRUPARPONDERAR','AGRUPARPONDERAR','24');
+
+
+--MODIFICAR
+
+INSERT INTO "CPSAA"."GESAC_MAE_PERM"(
+            "SCMAP_IDE_PERM_K", "SCMAP_COC_PERM", "SCMAP_NOM_PERM",
+"SCMAP_GLS_DES",
+            "SCMAP_GLS_MOD_FUN", "SCMAP_GLS_CAS_USO", "SCMAP_COC_EST")
+    VALUES (39, 'CAL013_PER_001', 'Permisos para Iconos de Acceso Directo',
+'Facilita la busqueda en la func. Buscar por Rango Muestra',
+            'CAL', 'CAL013', 'ACT');
+
+
+
+
+
+INSERT INTO "CPSAA"."GESAC_DET_PERM_ROL"(
+            "SCDPR_IDE_PERM_ROL_K", "SCMAP_IDE_PERM_K", "SCMAR_IDE_ROL_K",
+            "SCDPR_FLG_ELI", "SCDPR_COC_EST")
+    VALUES (285, 39, 26,
+            'N', 'ACT');
+
+
+
+
+INSERT INTO "CPSAA"."GESAC_DET_PERM_ROL"(
+            "SCDPR_IDE_PERM_ROL_K", "SCMAP_IDE_PERM_K", "SCMAR_IDE_ROL_K",
+            "SCDPR_FLG_ELI", "SCDPR_COC_EST")
+    VALUES (286, 39, 4,
+            'N', 'ACT');
