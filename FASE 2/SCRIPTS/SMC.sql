@@ -528,7 +528,6 @@ numeric(10,4);
 ---------------------
 
 
-
 CREATE OR REPLACE FUNCTION insertar_huso(numeric, numeric,numeric,character)
   RETURNS character varying AS
 $BODY$
@@ -537,20 +536,44 @@ DECLARE
        idMatr numeric:=0;
        idGrupTip numeric:=0;
        idTipoEnsa numeric:=0;
+       countMatr_Trat integer:=0;
+       countGrupTip integer:=0;
  BEGIN     
 
 
-  SELECT MAX("SCMMT_IDE_MATR_TRAT_K")+1 FROM "CPSAA"."GESAC_MAE_MATR_TRAT" INTO idMatr;      
-  INSERT INTO "CPSAA"."GESAC_MAE_MATR_TRAT" ("SCMMT_IDE_MATR_TRAT_K","SCMPC_IDE_PROC_K","SCMPR_IDE_PROD_K",
-                                           "SCMMT_NOM_MATR_TRAT","SCMMT_GLS_DES","SCMGT_FLG_RES","SCMMT_COC_EST")  VALUES 
-                                           (idMatr,$1,$3,(SELECT "SCMPR_NOM_PROD" FROM "CPSAA"."GESAC_MAE_PROD" 
-                                                          WHERE "SCMPR_IDE_PROD_K"=$3) ,'','N','ACT');
+   SELECT count(*) FROM  "CPSAA"."GESAC_MAE_MATR_TRAT"
+                         WHERE "SCMPC_IDE_PROC_K"=$1
+                         AND  "SCMPR_IDE_PROD_K"=$3  INTO countMatr_Trat;
+  
 
+   IF countMatr_Trat = 0  THEN
+        SELECT MAX("SCMMT_IDE_MATR_TRAT_K")+1 FROM "CPSAA"."GESAC_MAE_MATR_TRAT" INTO idMatr;      
+        INSERT INTO "CPSAA"."GESAC_MAE_MATR_TRAT" ("SCMMT_IDE_MATR_TRAT_K","SCMPC_IDE_PROC_K","SCMPR_IDE_PROD_K",
+                                                  "SCMMT_NOM_MATR_TRAT","SCMMT_GLS_DES","SCMGT_FLG_RES","SCMMT_COC_EST")  VALUES 
+                                                  (idMatr,$1,$3,(SELECT "SCMPR_NOM_PROD" FROM "CPSAA"."GESAC_MAE_PROD" 
+                                                          WHERE "SCMPR_IDE_PROD_K"=$3) ,'','N','ACT');
+   ELSE
+       SELECT "SCMMT_IDE_MATR_TRAT_K" FROM  "CPSAA"."GESAC_MAE_MATR_TRAT"
+                                      WHERE "SCMPC_IDE_PROC_K"=$1
+                                      AND  "SCMPR_IDE_PROD_K"=$3  INTO idMatr;
+   END IF;
+
+
+
+    SELECT count(*) FROM  "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" WHERE "SCMMT_IDE_MATR_TRAT_K"=idMatr INTO countGrupTip;
+
+    IF countGrupTip = 0 THEN
                                                           
-  SELECT MAX("SCMGT_IDE_GRUP_TIPO_ENSA_K")+1 FROM  "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" INTO idGrupTip;  
-  INSERT INTO "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" ("SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMMT_IDE_MATR_TRAT_K","SCMGT_NOM_GRUP_TIPO_ENSA",
-					  "SCMGT_COC_CAT_TIPO_ENSA","SCMGT_COC_HUS","SCMGT_COC_EST")  VALUES
-					  (idGrupTip,idMatr,'Análisis Granulométrico','FIS',$4,'ACT');
+     SELECT MAX("SCMGT_IDE_GRUP_TIPO_ENSA_K")+1 FROM  "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" INTO idGrupTip;  
+     INSERT INTO "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" ("SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMMT_IDE_MATR_TRAT_K","SCMGT_NOM_GRUP_TIPO_ENSA",
+				  	            "SCMGT_COC_CAT_TIPO_ENSA","SCMGT_COC_HUS","SCMGT_COC_EST")  VALUES
+					            (idGrupTip,idMatr,'Análisis Granulométrico','FIS',$4,'ACT');
+    ELSE 
+     SELECT "SCMMT_IDE_MATR_TRAT_K" FROM  "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" WHERE "SCMMT_IDE_MATR_TRAT_K"=idMatr INTO idGrupTip;
+
+    END IF;
+
+
 
 	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
@@ -594,6 +617,7 @@ DECLARE
 	"SCMTE_FLG_ESC_EMPR","SCMTE_FLG_CERT_CAL","SCMTE_NRO_POS_DECI","SCMTE_COC_EST","SMCTE_FLG_PRO_CAL","SCMTE_FLG_REP_PMZ","SCMTE_FLG_REP_PRO_PON") VALUES
 	(idTipoEnsa,idGrupTip,56,'3/8"','9.500','S',1,'N','N','POR','Asistente de Control de Calidad','N','S','N','N','S','S','S','N',1,'ACT','N','N','N');
 
+        SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
 	"SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -659,23 +683,42 @@ DECLARE
 
 
 
+   SELECT count(*) FROM  "CPSAA"."GESAC_MAE_MATR_TRAT"
+                         WHERE "SCMPC_IDE_PROC_K"=$2
+                         AND  "SCMPR_IDE_PROD_K"=$3  INTO countMatr_Trat;
+  
+
+   IF countMatr_Trat = 0  THEN
+          SELECT MAX("SCMMT_IDE_MATR_TRAT_K")+1 FROM "CPSAA"."GESAC_MAE_MATR_TRAT" INTO idMatr;                                                          
+                  INSERT INTO "CPSAA"."GESAC_MAE_MATR_TRAT" ("SCMMT_IDE_MATR_TRAT_K","SCMPC_IDE_PROC_K","SCMPR_IDE_PROD_K",
+                                                             "SCMMT_NOM_MATR_TRAT","SCMMT_GLS_DES","SCMGT_FLG_RES","SCMMT_COC_EST")  VALUES 
+                                                             (idMatr,$2,$3,(SELECT "SCMPR_NOM_PROD" 
+							       FROM "CPSAA"."GESAC_MAE_PROD" 
+							        WHERE "SCMPR_IDE_PROD_K"=$3),'','N','ACT');
+   ELSE
+       SELECT "SCMMT_IDE_MATR_TRAT_K" FROM  "CPSAA"."GESAC_MAE_MATR_TRAT"
+                                      WHERE "SCMPC_IDE_PROC_K"=$2
+                                      AND  "SCMPR_IDE_PROD_K"=$3  INTO idMatr;
+   END IF;
 
 					  
 					  
 
-  SELECT MAX("SCMMT_IDE_MATR_TRAT_K")+1 FROM "CPSAA"."GESAC_MAE_MATR_TRAT" INTO idMatr;                                                          
-  INSERT INTO "CPSAA"."GESAC_MAE_MATR_TRAT" ("SCMMT_IDE_MATR_TRAT_K","SCMPC_IDE_PROC_K","SCMPR_IDE_PROD_K",
-                                           "SCMMT_NOM_MATR_TRAT","SCMMT_GLS_DES","SCMGT_FLG_RES","SCMMT_COC_EST")  VALUES 
-                                           (idMatr,$2,$3,(SELECT "SCMPR_NOM_PROD" 
-							  FROM "CPSAA"."GESAC_MAE_PROD" 
-							  WHERE "SCMPR_IDE_PROD_K"=$3),'','N','ACT');
+   
+    SELECT count(*) FROM  "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" WHERE "SCMMT_IDE_MATR_TRAT_K"=idMatr INTO countGrupTip;
 
-  SELECT MAX("SCMGT_IDE_GRUP_TIPO_ENSA_K")+1 FROM  "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" INTO idGrupTip;
-  INSERT INTO "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" ("SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMMT_IDE_MATR_TRAT_K","SCMGT_NOM_GRUP_TIPO_ENSA",
-                                                  "SCMGT_COC_CAT_TIPO_ENSA","SCMGT_COC_HUS","SCMGT_COC_EST")  VALUES
-                                                 (idGrupTip,idMatr,'Análisis Granulométrico','FIS',$4,'ACT');
+    IF countGrupTip =0 THEN
+                                                          
+     SELECT MAX("SCMGT_IDE_GRUP_TIPO_ENSA_K")+1 FROM  "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" INTO idGrupTip;  
+     INSERT INTO "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" ("SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMMT_IDE_MATR_TRAT_K","SCMGT_NOM_GRUP_TIPO_ENSA",
+				  	            "SCMGT_COC_CAT_TIPO_ENSA","SCMGT_COC_HUS","SCMGT_COC_EST")  VALUES
+					            (idGrupTip,idMatr,'Análisis Granulométrico','FIS',$4,'ACT');
+    ELSE 
+     SELECT "SCMMT_IDE_MATR_TRAT_K" FROM  "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" WHERE "SCMMT_IDE_MATR_TRAT_K"=idMatr INTO idGrupTip;
 
-                                                                                                            
+    END IF;
+
+                                                                                                           
 
 					  
 
@@ -721,6 +764,7 @@ DECLARE
   "SCMTE_FLG_ESC_EMPR","SCMTE_FLG_CERT_CAL","SCMTE_NRO_POS_DECI","SCMTE_COC_EST","SMCTE_FLG_PRO_CAL","SCMTE_FLG_REP_PMZ","SCMTE_FLG_REP_PRO_PON") VALUES
   (idTipoEnsa,idGrupTip,56,'3/8"','9.500','S',1,'N','N','POR','Asistente de Control de Calidad','N','S','N','N','S','S','S','N',1,'ACT','N','N','N');
 
+   SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
   "SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -784,11 +828,11 @@ DECLARE
   (idTipoEnsa,idGrupTip,65,'MF','','S',1,'N','N','','Asistente de Control de Calidad','S','N','N','N','S','S','S','N',2,'ACT','N','N','N');
 
 
-                                               
-     
+                                            
+    
 							  
 
-  RETURN CANTIDAD;     
+  RETURN 'INSERTO CON EXITO ;-)';     
            
  END;
  $BODY$
@@ -797,103 +841,45 @@ DECLARE
 ALTER FUNCTION insertar_huso(numeric, numeric, numeric, character) OWNER TO postgres;
 
 
-SELECT insertar_huso(52,60,554,'H4');
-SELECT insertar_huso(52,60,554,'H4');
-SELECT insertar_huso(52,60,363,'H5');
-SELECT insertar_huso(52,60,373,'H5');
-SELECT insertar_huso(52,60,366,'H6');
-SELECT insertar_huso(52,60,368,'H7');
-SELECT insertar_huso(52,60,380,'H7');
-SELECT insertar_huso(52,60,381,'H8');
-SELECT insertar_huso(52,60,369,'H8');
-SELECT insertar_huso(52,60,361,'H9');
-SELECT insertar_huso(52,60,371,'H9');
-SELECT insertar_huso(52,60,383,'H9');
-SELECT insertar_huso(52,60,364,'H56');
-SELECT insertar_huso(52,60,374,'H56');
-SELECT insertar_huso(52,60,364,'H57');
-SELECT insertar_huso(52,60,374,'H57');
-SELECT insertar_huso(52,60,367,'H67');
-SELECT insertar_huso(52,60,378,'H67');
-SELECT insertar_huso(52,60,379,'H67');
-SELECT insertar_huso(52,60,370,'H89');
-SELECT insertar_huso(52,60,382,'H89');
-SELECT insertar_huso(52,60,362,'H467');
-SELECT insertar_huso(52,60,372,'H467');
 
-SELECT insertar_huso(49,56,554,'H4');
-SELECT insertar_huso(49,56,554,'H4');
-SELECT insertar_huso(49,56,363,'H5');
-SELECT insertar_huso(49,56,373,'H5');
-SELECT insertar_huso(49,56,366,'H6');
-SELECT insertar_huso(49,56,368,'H7');
-SELECT insertar_huso(49,56,380,'H7');
-SELECT insertar_huso(49,56,381,'H8');
-SELECT insertar_huso(49,56,369,'H8');
-SELECT insertar_huso(49,56,361,'H9');
-SELECT insertar_huso(49,56,371,'H9');
-SELECT insertar_huso(49,56,383,'H9');
-SELECT insertar_huso(49,56,364,'H56');
-SELECT insertar_huso(49,56,374,'H56');
-SELECT insertar_huso(49,56,364,'H57');
-SELECT insertar_huso(49,56,374,'H57');
-SELECT insertar_huso(49,56,367,'H67');
-SELECT insertar_huso(49,56,378,'H67');
-SELECT insertar_huso(49,56,379,'H67');
-SELECT insertar_huso(49,56,370,'H89');
-SELECT insertar_huso(49,56,382,'H89');
-SELECT insertar_huso(49,56,362,'H467');
-SELECT insertar_huso(49,56,372,'H467');
+INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
+                              VALUES (553,'A.G. chancado TMN=1/2" a 3/4" - H4','AGC1.H4','A. Grueso chancado TMN=1/2" a 3/4" - H4"','AGR','ACT');
 
-SELECT insertar_huso(51,59,554,'H4');
-SELECT insertar_huso(51,59,554,'H4');
-SELECT insertar_huso(51,59,363,'H5');
-SELECT insertar_huso(51,59,373,'H5');
-SELECT insertar_huso(51,59,366,'H6');
-SELECT insertar_huso(51,59,368,'H7');
-SELECT insertar_huso(51,59,380,'H7');
-SELECT insertar_huso(51,59,381,'H8');
-SELECT insertar_huso(51,59,369,'H8');
-SELECT insertar_huso(51,59,361,'H9');
-SELECT insertar_huso(51,59,371,'H9');
-SELECT insertar_huso(51,59,383,'H9');
-SELECT insertar_huso(51,59,364,'H56');
-SELECT insertar_huso(51,59,374,'H56');
-SELECT insertar_huso(51,59,364,'H57');
-SELECT insertar_huso(51,59,374,'H57');
-SELECT insertar_huso(51,59,367,'H67');
-SELECT insertar_huso(51,59,378,'H67');
-SELECT insertar_huso(51,59,379,'H67');
-SELECT insertar_huso(51,59,370,'H89');
-SELECT insertar_huso(51,59,382,'H89');
-SELECT insertar_huso(51,59,362,'H467');
-SELECT insertar_huso(51,59,372,'H467');
+INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
+                              VALUES (554,'A.G. zarandeado TMN=1/2" a 3/4" - H4','AGZ1.H4','A. Grueso zarandeado TMN=1/2" a 3/4" - H4"','AGR','ACT');
 
-SELECT insertar_huso(53,61,554,'H4');
-SELECT insertar_huso(53,61,554,'H4');
-SELECT insertar_huso(53,61,363,'H5');
-SELECT insertar_huso(53,61,373,'H5');
-SELECT insertar_huso(53,61,366,'H6');
-SELECT insertar_huso(53,61,368,'H7');
-SELECT insertar_huso(53,61,380,'H7');
-SELECT insertar_huso(53,61,381,'H8');
-SELECT insertar_huso(53,61,369,'H8');
-SELECT insertar_huso(53,61,361,'H9');
-SELECT insertar_huso(53,61,371,'H9');
-SELECT insertar_huso(53,61,383,'H9');
-SELECT insertar_huso(53,61,364,'H56');
-SELECT insertar_huso(53,61,374,'H56');
-SELECT insertar_huso(53,61,364,'H57');
-SELECT insertar_huso(53,61,374,'H57');
-SELECT insertar_huso(53,61,367,'H67');
-SELECT insertar_huso(53,61,378,'H67');
-SELECT insertar_huso(53,61,379,'H67');
-SELECT insertar_huso(53,61,370,'H89');
-SELECT insertar_huso(53,61,382,'H89');
-SELECT insertar_huso(53,61,362,'H467');
-SELECT insertar_huso(53,61,372,'H467');
+--CAJAMAR->RE(50),ZA(58)
+--CHICLA-->RE(32),ZA(57)
+--CHIMBO-->RE(53),ZA(61)
+--PACASMA-->RE(51),ZA(59)
+--PIURA-->RE(49),ZA(56)
+--TRUJI-->RE(52),ZA(60)
 
-SELECT insertar_huso(32,57,554,'H4');
+SELECT insertar_huso(50,58,553,'H4');
+SELECT insertar_huso(50,58,554,'H4');
+SELECT insertar_huso(50,58,363,'H5');
+SELECT insertar_huso(50,58,373,'H5');
+SELECT insertar_huso(50,58,366,'H6');
+SELECT insertar_huso(50,58,368,'H7');
+SELECT insertar_huso(50,58,380,'H7');
+SELECT insertar_huso(50,58,381,'H8');
+SELECT insertar_huso(50,58,369,'H8');
+SELECT insertar_huso(50,58,361,'H9');
+SELECT insertar_huso(50,58,371,'H9');
+SELECT insertar_huso(50,58,383,'H9');
+SELECT insertar_huso(50,58,364,'H56');
+SELECT insertar_huso(50,58,374,'H56');
+SELECT insertar_huso(50,58,364,'H57');
+SELECT insertar_huso(50,58,374,'H57');
+SELECT insertar_huso(50,58,367,'H67');
+SELECT insertar_huso(50,58,378,'H67');
+SELECT insertar_huso(50,58,379,'H67');
+SELECT insertar_huso(50,58,370,'H89');
+SELECT insertar_huso(50,58,382,'H89');
+SELECT insertar_huso(50,58,362,'H467');
+SELECT insertar_huso(50,58,372,'H467');
+
+SELECT insertar_huso(32,57,553,'H4');
 SELECT insertar_huso(32,57,554,'H4');
 SELECT insertar_huso(32,57,363,'H5');
 SELECT insertar_huso(32,57,373,'H5');
@@ -917,27 +903,75 @@ SELECT insertar_huso(32,57,382,'H89');
 SELECT insertar_huso(32,57,362,'H467');
 SELECT insertar_huso(32,57,372,'H467');
 
- 
-SELECT insertar_huso(50,58,554,'H4');
-SELECT insertar_huso(50,58,554,'H4');
-SELECT insertar_huso(50,58,363,'H5');
-SELECT insertar_huso(50,58,373,'H5');
-SELECT insertar_huso(50,58,366,'H6');
-SELECT insertar_huso(50,58,368,'H7');
-SELECT insertar_huso(50,58,380,'H7');
-SELECT insertar_huso(50,58,381,'H8');
-SELECT insertar_huso(50,58,369,'H8');
-SELECT insertar_huso(50,58,361,'H9');
-SELECT insertar_huso(50,58,371,'H9');
-SELECT insertar_huso(50,58,383,'H9');
-SELECT insertar_huso(50,58,364,'H56');
-SELECT insertar_huso(50,58,374,'H56');
-SELECT insertar_huso(50,58,364,'H57');
-SELECT insertar_huso(50,58,374,'H57');
-SELECT insertar_huso(50,58,367,'H67');
-SELECT insertar_huso(50,58,378,'H67');
-SELECT insertar_huso(50,58,379,'H67');
-SELECT insertar_huso(50,58,370,'H89');
-SELECT insertar_huso(50,58,382,'H89');
-SELECT insertar_huso(50,58,362,'H467');
-SELECT insertar_huso(50,58,372,'H467');
+SELECT insertar_huso(51,59,553,'H4');
+SELECT insertar_huso(51,59,554,'H4');
+SELECT insertar_huso(51,59,363,'H5');
+SELECT insertar_huso(51,59,373,'H5');
+SELECT insertar_huso(51,59,366,'H6');
+SELECT insertar_huso(51,59,368,'H7');
+SELECT insertar_huso(51,59,380,'H7');
+SELECT insertar_huso(51,59,381,'H8');
+SELECT insertar_huso(51,59,369,'H8');
+SELECT insertar_huso(51,59,361,'H9');
+SELECT insertar_huso(51,59,371,'H9');
+SELECT insertar_huso(51,59,383,'H9');
+SELECT insertar_huso(51,59,364,'H56');
+SELECT insertar_huso(51,59,374,'H56');
+SELECT insertar_huso(51,59,364,'H57');
+SELECT insertar_huso(51,59,374,'H57');
+SELECT insertar_huso(51,59,367,'H67');
+SELECT insertar_huso(51,59,378,'H67');
+SELECT insertar_huso(51,59,379,'H67');
+SELECT insertar_huso(51,59,370,'H89');
+SELECT insertar_huso(51,59,382,'H89');
+SELECT insertar_huso(51,59,362,'H467');
+SELECT insertar_huso(51,59,372,'H467');
+
+SELECT insertar_huso(49,56,553,'H4');
+SELECT insertar_huso(49,56,554,'H4');
+SELECT insertar_huso(49,56,363,'H5');
+SELECT insertar_huso(49,56,373,'H5');
+SELECT insertar_huso(49,56,366,'H6');
+SELECT insertar_huso(49,56,368,'H7');
+SELECT insertar_huso(49,56,380,'H7');
+SELECT insertar_huso(49,56,381,'H8');
+SELECT insertar_huso(49,56,369,'H8');
+SELECT insertar_huso(49,56,361,'H9');
+SELECT insertar_huso(49,56,371,'H9');
+SELECT insertar_huso(49,56,383,'H9');
+SELECT insertar_huso(49,56,364,'H56');
+SELECT insertar_huso(49,56,374,'H56');
+SELECT insertar_huso(49,56,364,'H57');
+SELECT insertar_huso(49,56,374,'H57');
+SELECT insertar_huso(49,56,367,'H67');
+SELECT insertar_huso(49,56,378,'H67');
+SELECT insertar_huso(49,56,379,'H67');
+SELECT insertar_huso(49,56,370,'H89');
+SELECT insertar_huso(49,56,382,'H89');
+SELECT insertar_huso(49,56,362,'H467');
+SELECT insertar_huso(49,56,372,'H467');
+
+SELECT insertar_huso(52,60,553,'H4');
+SELECT insertar_huso(52,60,554,'H4');
+SELECT insertar_huso(52,60,363,'H5');
+SELECT insertar_huso(52,60,373,'H5');
+SELECT insertar_huso(52,60,366,'H6');
+SELECT insertar_huso(52,60,368,'H7');
+SELECT insertar_huso(52,60,380,'H7');
+SELECT insertar_huso(52,60,381,'H8');
+SELECT insertar_huso(52,60,369,'H8');
+SELECT insertar_huso(52,60,361,'H9');
+SELECT insertar_huso(52,60,371,'H9');
+SELECT insertar_huso(52,60,383,'H9');
+SELECT insertar_huso(52,60,364,'H56');
+SELECT insertar_huso(52,60,374,'H56');
+SELECT insertar_huso(52,60,364,'H57');
+SELECT insertar_huso(52,60,374,'H57');
+SELECT insertar_huso(52,60,367,'H67');
+SELECT insertar_huso(52,60,378,'H67');
+SELECT insertar_huso(52,60,379,'H67');
+SELECT insertar_huso(52,60,370,'H89');
+SELECT insertar_huso(52,60,382,'H89');
+SELECT insertar_huso(52,60,362,'H467');
+SELECT insertar_huso(52,60,372,'H467');
+
