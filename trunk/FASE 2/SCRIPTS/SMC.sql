@@ -527,6 +527,9 @@ numeric(10,4);
 
 ---------------------
 
+ALTER TABLE "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" ALTER COLUMN "SCMGT_COC_HUS" TYPE character varying(4);
+---
+
 
 CREATE OR REPLACE FUNCTION insertar_huso(numeric, numeric,numeric,character)
   RETURNS character varying AS
@@ -841,12 +844,24 @@ DECLARE
 ALTER FUNCTION insertar_huso(numeric, numeric, numeric, character) OWNER TO postgres;
 
 
+INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
+                              VALUES ((SELECT coalesce(max(PROD."SCMPR_IDE_PROD_K"),0) + 1  from  "CPSAA"."GESAC_MAE_PROD" PROD),'A.G. chancado TMN=1/2" a 3/4" - H4','AGC1.H4','A. Grueso chancado TMN=1/2" a 3/4" - H4"','AGR','ACT');
+
+SELECT insertar_huso(50,58,(SELECT MAX("SCMPR_IDE_PROD_K") FROM "CPSAA"."GESAC_MAE_PROD"),'H4');
+SELECT insertar_huso(32,57,(SELECT MAX("SCMPR_IDE_PROD_K") FROM "CPSAA"."GESAC_MAE_PROD"),'H4');
+SELECT insertar_huso(51,59,(SELECT MAX("SCMPR_IDE_PROD_K") FROM "CPSAA"."GESAC_MAE_PROD"),'H4');
+SELECT insertar_huso(49,56,(SELECT MAX("SCMPR_IDE_PROD_K") FROM "CPSAA"."GESAC_MAE_PROD"),'H4');
+SELECT insertar_huso(52,60,(SELECT MAX("SCMPR_IDE_PROD_K") FROM "CPSAA"."GESAC_MAE_PROD"),'H4');
+
 
 INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES (553,'A.G. chancado TMN=1/2" a 3/4" - H4','AGC1.H4','A. Grueso chancado TMN=1/2" a 3/4" - H4"','AGR','ACT');
+                              VALUES ((SELECT coalesce(max(PROD."SCMPR_IDE_PROD_K"),0) + 1  from  "CPSAA"."GESAC_MAE_PROD" PROD),'A.G. zarandeado TMN=1/2" a 3/4" - H4','AGZ1.H4','A. Grueso zarandeado TMN=1/2" a 3/4" - H4"','AGR','ACT');
 
-INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES (554,'A.G. zarandeado TMN=1/2" a 3/4" - H4','AGZ1.H4','A. Grueso zarandeado TMN=1/2" a 3/4" - H4"','AGR','ACT');
+SELECT insertar_huso(50,58,(SELECT MAX("SCMPR_IDE_PROD_K") FROM "CPSAA"."GESAC_MAE_PROD"),'H4');
+SELECT insertar_huso(32,57,(SELECT MAX("SCMPR_IDE_PROD_K") FROM "CPSAA"."GESAC_MAE_PROD"),'H4');
+SELECT insertar_huso(51,59,(SELECT MAX("SCMPR_IDE_PROD_K") FROM "CPSAA"."GESAC_MAE_PROD"),'H4');
+SELECT insertar_huso(49,56,(SELECT MAX("SCMPR_IDE_PROD_K") FROM "CPSAA"."GESAC_MAE_PROD"),'H4');
+SELECT insertar_huso(52,60,(SELECT MAX("SCMPR_IDE_PROD_K") FROM "CPSAA"."GESAC_MAE_PROD"),'H4');
 
 --CAJAMAR->RE(50),ZA(58)
 --CHICLA-->RE(32),ZA(57)
@@ -855,8 +870,7 @@ INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR
 --PIURA-->RE(49),ZA(56)
 --TRUJI-->RE(52),ZA(60)
 
-SELECT insertar_huso(50,58,553,'H4');
-SELECT insertar_huso(50,58,554,'H4');
+
 SELECT insertar_huso(50,58,363,'H5');
 SELECT insertar_huso(50,58,373,'H5');
 SELECT insertar_huso(50,58,366,'H6');
@@ -879,8 +893,7 @@ SELECT insertar_huso(50,58,382,'H89');
 SELECT insertar_huso(50,58,362,'H467');
 SELECT insertar_huso(50,58,372,'H467');
 
-SELECT insertar_huso(32,57,553,'H4');
-SELECT insertar_huso(32,57,554,'H4');
+
 SELECT insertar_huso(32,57,363,'H5');
 SELECT insertar_huso(32,57,373,'H5');
 SELECT insertar_huso(32,57,366,'H6');
@@ -903,8 +916,7 @@ SELECT insertar_huso(32,57,382,'H89');
 SELECT insertar_huso(32,57,362,'H467');
 SELECT insertar_huso(32,57,372,'H467');
 
-SELECT insertar_huso(51,59,553,'H4');
-SELECT insertar_huso(51,59,554,'H4');
+
 SELECT insertar_huso(51,59,363,'H5');
 SELECT insertar_huso(51,59,373,'H5');
 SELECT insertar_huso(51,59,366,'H6');
@@ -927,8 +939,7 @@ SELECT insertar_huso(51,59,382,'H89');
 SELECT insertar_huso(51,59,362,'H467');
 SELECT insertar_huso(51,59,372,'H467');
 
-SELECT insertar_huso(49,56,553,'H4');
-SELECT insertar_huso(49,56,554,'H4');
+
 SELECT insertar_huso(49,56,363,'H5');
 SELECT insertar_huso(49,56,373,'H5');
 SELECT insertar_huso(49,56,366,'H6');
@@ -951,8 +962,7 @@ SELECT insertar_huso(49,56,382,'H89');
 SELECT insertar_huso(49,56,362,'H467');
 SELECT insertar_huso(49,56,372,'H467');
 
-SELECT insertar_huso(52,60,553,'H4');
-SELECT insertar_huso(52,60,554,'H4');
+
 SELECT insertar_huso(52,60,363,'H5');
 SELECT insertar_huso(52,60,373,'H5');
 SELECT insertar_huso(52,60,366,'H6');
