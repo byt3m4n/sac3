@@ -884,15 +884,15 @@ ALTER TABLE "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" ALTER COLUMN "SCMGT_COC_HUS" TYPE
 ---
 
 
--- Function: insertar_huso(numeric, numeric, numeric, character, numeric, numeric)
+-- Function: insertar_huso(numeric, numeric, numeric, character, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric)
 
--- DROP FUNCTION insertar_huso(numeric, numeric, numeric, character, numeric, numeric);
+-- DROP FUNCTION insertar_huso(numeric, numeric, numeric, character, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric);
 
-CREATE OR REPLACE FUNCTION insertar_huso(numeric, numeric, numeric, character, numeric, numeric,		
-        numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,
-		numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,
-		numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,
-		numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric)
+CREATE OR REPLACE FUNCTION insertar_huso(numeric, numeric, numeric, character, numeric, numeric, 
+numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, 
+numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric,
+numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, 
+numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric)
   RETURNS character varying AS
 $BODY$
 DECLARE        
@@ -903,6 +903,7 @@ DECLARE
        countMatr_Trat integer:=0;
        countGrupTip integer:=0;
  BEGIN     
+
 
   IF $5 = 1  THEN
    
@@ -953,7 +954,10 @@ DECLARE
 	INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
                                               "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
                                              ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-                                             idTipoEnsa,'N','N','S','N','CON',$14,$1);
+                                             idTipoEnsa,'N','N','S','N','CON',$20,$7);
+
+
+
 											 
 	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
@@ -965,8 +969,8 @@ DECLARE
 	INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
                                               "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
                                              ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-                                             idTipoEnsa,'N','N','S','N','CON',$15,$2);											 
-										 
+                                             idTipoEnsa,'N','N','S','N','CON',$21,$8);											 
+									 
 											 
 	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
@@ -978,7 +982,7 @@ DECLARE
 	INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
                                               "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
                                              ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-                                             idTipoEnsa,'N','N','S','N','CON',$16,$3);
+                                             idTipoEnsa,'N','N','S','N','CON',$22,$9);
 	
 
 	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
@@ -991,7 +995,7 @@ DECLARE
 	INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
                                               "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
                                              ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-                                             idTipoEnsa,'N','N','S','N','CON',$17,$4);
+                                             idTipoEnsa,'N','N','S','N','CON',$23,$10);
 
 	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
@@ -1003,9 +1007,9 @@ DECLARE
 	INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
                                               "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
                                              ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-                                             idTipoEnsa,'N','N','S','N','CON',$18,$5);
+                                             idTipoEnsa,'N','N','S','N','CON',$24,$11);
 
-                                        
+                               
 	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1017,9 +1021,9 @@ DECLARE
 	INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
                                               "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
                                              ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-                                             idTipoEnsa,'N','N','S','N','CON',$19,$6);
+                                             idTipoEnsa,'N','N','S','N','CON',$25,$12);
 
-                                         
+                               
         SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1031,9 +1035,9 @@ DECLARE
 	INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
                                               "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
                                              ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-                                             idTipoEnsa,'N','N','S','N','CON',$20,$7);
+                                             idTipoEnsa,'N','N','S','N','CON',$26,$13);
 
-                                        
+                                  
 	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1044,9 +1048,9 @@ DECLARE
 	INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
                                               "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
                                              ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-                                             idTipoEnsa,'N','N','S','N','CON',$21,$8);
+                                             idTipoEnsa,'N','N','S','N','CON',$27,$14);
 
-                                        
+                            
 	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1057,9 +1061,9 @@ DECLARE
 	INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
                                               "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
                                              ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-                                             idTipoEnsa,'N','N','S','N','CON',$22,$9);
+                                             idTipoEnsa,'N','N','S','N','CON',$28,$15);
 
-                                      
+                                 
 	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1070,9 +1074,9 @@ DECLARE
 	INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
                                               "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
                                              ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-                                             idTipoEnsa,'N','N','S','N','CON',$23,$10);
+                                             idTipoEnsa,'N','N','S','N','CON',$29,$16);
 
-                                         
+                                 
 	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1083,9 +1087,9 @@ DECLARE
 	INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
                                               "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
                                              ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-                                             idTipoEnsa,'N','N','S','N','CON',$24,$11);
+                                             idTipoEnsa,'N','N','S','N','CON',$30,$17);
 
-                                      
+                             
 	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1096,9 +1100,9 @@ DECLARE
 	INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
                                               "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
                                              ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-                                             idTipoEnsa,'N','N','S','N','CON',$25,$12);
+                                             idTipoEnsa,'N','N','S','N','CON',$31,$18);
 
-                                     
+                            
 	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1109,8 +1113,8 @@ DECLARE
 	INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
                                               "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
                                              ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-                                             idTipoEnsa,'N','N','S','N','CON',$26,$13);
-                                    
+                                             idTipoEnsa,'N','N','S','N','CON',$32,$19);
+                        
 	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1189,11 +1193,11 @@ DECLARE
  (idTipoEnsa,idGrupTip,51,'2"','50.000','S',1,'N','N','POR','Asistente de Control de Calidad','N','N','N','N','S','S','S','N',1,'ACT','N','N','N');
 
   INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
-				      "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT") VALUES
+				      "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
 				     ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-				     idTipoEnsa,'N','N','S','N','CON',$40,$27);
+				     idTipoEnsa,'N','N','S','N','CON',$46,$33);
 
-                                        
+                                   
   SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1204,9 +1208,9 @@ DECLARE
   INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
 				      "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
 				     ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-				     idTipoEnsa,'N','N','S','N','CON',$41,$28);
+				     idTipoEnsa,'N','N','S','N','CON',$47,$34);
 
-,                                          
+                                     
   SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1217,9 +1221,9 @@ DECLARE
   INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
 				      "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
 				     ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-				     idTipoEnsa,'N','N','S','N','CON',$42,$29);
+				     idTipoEnsa,'N','N','S','N','CON',$48,$35);
 
-                                       
+                               
   SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1230,9 +1234,9 @@ DECLARE
   INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
 				      "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
 				     ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-				     idTipoEnsa,'N','N','S','N','CON',$43,$30);
+				     idTipoEnsa,'N','N','S','N','CON',$49,$36);
 
-                                          
+                                      
   SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1243,9 +1247,9 @@ DECLARE
   INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
 				      "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
 				     ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-				     idTipoEnsa,'N','N','S','N','CON',$44,$31);
+				     idTipoEnsa,'N','N','S','N','CON',$50,$37);
 
-                                         
+                                      
   SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1256,9 +1260,9 @@ DECLARE
   INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
 				      "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
 				     ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-				     idTipoEnsa,'N','N','S','N','CON',$45,$32);
+				     idTipoEnsa,'N','N','S','N','CON',$51,$38);
 
-                                            
+                                      
    SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1269,9 +1273,9 @@ DECLARE
   INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
 				      "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
 				     ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-				     idTipoEnsa,'N','N','S','N','CON',$46,$33);
+				     idTipoEnsa,'N','N','S','N','CON',$52,$39);
 
-                                          
+                                         
   SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1282,9 +1286,9 @@ DECLARE
   INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
 				      "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
 				     ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-				     idTipoEnsa,'N','N','S','N','CON',$47,$34);
+				     idTipoEnsa,'N','N','S','N','CON',$53,$40);
 
-                                          
+                                      
   SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1295,9 +1299,9 @@ DECLARE
   INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
 				      "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
 				     ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-				     idTipoEnsa,'N','N','S','N','CON',$48,$35);
+				     idTipoEnsa,'N','N','S','N','CON',$54,$41);
 
-                                         
+                                        
   SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1308,9 +1312,9 @@ DECLARE
   INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
 				      "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
 				     ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-				     idTipoEnsa,'N','N','S','N','CON',$48,$36);
+				     idTipoEnsa,'N','N','S','N','CON',$55,$42);
 
-                                            
+                                        
   SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1321,9 +1325,9 @@ DECLARE
   INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
 				      "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
 				     ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-				     idTipoEnsa,'N','N','S','N','CON',$50,$37);
+				     idTipoEnsa,'N','N','S','N','CON',$56,$43);
 
-                                             
+                                           
   SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1334,7 +1338,7 @@ DECLARE
   INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
 				      "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
 				     ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-				     idTipoEnsa,'N','N','S','N','CON',$51,$38);
+				     idTipoEnsa,'N','N','S','N','CON',$57,$44);
 
                                          
   SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
@@ -1347,9 +1351,9 @@ DECLARE
   INSERT INTO  "CPSAA"."GESAC_MOV_CONT" ("SCMOC_IDE_CONT_K","SCMTE_IDE_TIPO_ENSA_K","SCMOC_FLG_CONT_INF_UM","SCMOC_FLG_CONT_SUP_UM",
 				      "SCMOC_FLG_CONT_INF_PRO","SCMOC_FLG_CONT_SUP_PRO","SCMOC_COC_TIPO_CONT","SCMOC_VLR_CONT_SUP_PRO","SCMOC_VLR_CONT_INF_PRO") VALUES
 				     ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
-				     idTipoEnsa,'N','N','S','N','CON',$52,$39);
+				     idTipoEnsa,'N','N','S','N','CON',$58,$45);
 
-                                       
+                                 
   SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
@@ -1386,19 +1390,36 @@ DECLARE
  $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
-ALTER FUNCTION insertar_huso(numeric, numeric, numeric, character, numeric, numeric,
-        numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,
-		numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,
-		numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,
-		numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric,numeric) OWNER TO postgres;
+ALTER FUNCTION insertar_huso(numeric, numeric, numeric, character, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric) OWNER TO postgres;
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 
--- Function: insertar_huso_x_planta(character, numeric, numeric)
+							  
+INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
+                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'A.G. chancado TMN=1/2" a 3/4" - H4','H4','A.G. chancado TMN=1/2" a 3/4" - H4','AGR','ACT');	
 
--- DROP FUNCTION insertar_huso_x_planta(character, numeric, numeric);
+INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
+                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'A.G. zarandeado TMN=1/2" a 3/4','H4','A.G. zarandeado TMN=1/2" a 3/4','AGR','ACT');
+							  
+INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
+                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agragado fino Chancado','AF','Agragado fino Chancado','AGR','ACT');
+							  
+INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
+                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agregado fino zarandeado','AF','Agregado fino zarandeado','AGR','ACT');							  
+							  
+INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
+                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agragado fino Chancado M','AF','Agragado fino Chancado M','AGR','ACT');
+							  
+INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
+                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agregado fino zarandeado M','AF','Agregado fino zarandeado M','AGR','ACT');
 
-CREATE OR REPLACE FUNCTION insertar_huso_x_planta(character, numeric, numeric,character)
+------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Function: insertar_huso_x_planta(character, numeric, numeric, character, numeric, numeric, numeric, numeric)
+
+-- DROP FUNCTION insertar_huso_x_planta(character, numeric, numeric, character, numeric, numeric, numeric, numeric);
+
+CREATE OR REPLACE FUNCTION insertar_huso_x_planta(character, numeric, numeric, character, numeric, numeric, numeric, numeric)
   RETURNS character varying AS
 $BODY$
 DECLARE      
@@ -1434,6 +1455,7 @@ DECLARE
        idProducto27 numeric:=0;
        idProducto28 numeric:=0;
        idProducto29 numeric:=0;
+	   idProducto30 numeric:=0;
        
        insert1 character;
        insert2 character;
@@ -1464,6 +1486,7 @@ DECLARE
        insert27 character;
        insert28 character;
        insert29 character;
+	   insert30 character;
 	   
 	
 		p1min2 numeric:=0;
@@ -1568,66 +1591,69 @@ DECLARE
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
 	WHERE "SCMPR_NOM_PROD"='Agregado fino chancado - H9' INTO idProducto9;
+	
+	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
+	WHERE "SCMPR_NOM_PROD"='Agregado fino zarandeado - H9' INTO idProducto10;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='A.G. chancado TMN=No. 4 a No. 16 - H9' INTO idProducto10;
+	WHERE "SCMPR_NOM_PROD"='A.G. chancado TMN=No. 4 a No. 16 - H9' INTO idProducto11;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado TMN=No. 4 a No. 16 - H9' INTO idProducto11;
+	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado TMN=No. 4 a No. 16 - H9' INTO idProducto12;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='A.G. chancado TMN=1" a 3/8" - H56' INTO idProducto12;
+	WHERE "SCMPR_NOM_PROD"='A.G. chancado TMN=1" a 3/8" - H56' INTO idProducto13;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado TMN=1" a 3/8" - H56' INTO idProducto13;
+	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado TMN=1" a 3/8" - H56' INTO idProducto14;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='A.G. chancado TMN=1" a No. 4 - H57' INTO idProducto14;
+	WHERE "SCMPR_NOM_PROD"='A.G. chancado TMN=1" a No. 4 - H57' INTO idProducto15;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado TMN=1" a No. 4 - H57' INTO idProducto15;
+	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado TMN=1" a No. 4 - H57' INTO idProducto16;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado B TMN=1" a No. 4 - H57' INTO idProducto16;
+	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado B TMN=1" a No. 4 - H57' INTO idProducto17;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='A.G. chancado TMN=3/4" a No. 4 - H67' INTO idProducto17;
+	WHERE "SCMPR_NOM_PROD"='A.G. chancado TMN=3/4" a No. 4 - H67' INTO idProducto18;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado TMN=3/4" a No. 4 - H67' INTO idProducto18;
+	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado TMN=3/4" a No. 4 - H67' INTO idProducto19;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado B TMN=3/4" a No. 4 - H67' INTO idProducto19;
+	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado B TMN=3/4" a No. 4 - H67' INTO idProducto20;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='A.G. chancado TMN=3/8" a No. 16 - H89' INTO idProducto20;
+	WHERE "SCMPR_NOM_PROD"='A.G. chancado TMN=3/8" a No. 16 - H89' INTO idProducto21;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado TMN=3/8" a No. 16 - H89' INTO idProducto21;
+	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado TMN=3/8" a No. 16 - H89' INTO idProducto22;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='A.G. chancado TMN=1 1/2 a No. 4 - H467' INTO idProducto22;
+	WHERE "SCMPR_NOM_PROD"='A.G. chancado TMN=1 1/2 a No. 4 - H467' INTO idProducto23;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado TMN=1 1/2 a No. 4 - H467' INTO idProducto23;
+	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado TMN=1 1/2 a No. 4 - H467' INTO idProducto24;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='A. Grueso chancado TMN=1/2" a 3/4" - H4"' INTO idProducto24;
+	WHERE "SCMPR_NOM_PROD"='A.G. chancado TMN=1/2" a 3/4" - H4' INTO idProducto25;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='A. Grueso zarandeado TMN=1/2" a 3/4" - H4"' INTO idProducto25;
+	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado TMN=1/2" a 3/4" - H4' INTO idProducto26;
 
         SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='Agragado fino Chancado' INTO idProducto26;
+	WHERE "SCMPR_NOM_PROD"='Agragado fino Chancado' INTO idProducto27;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='Agregado fino zarandeado' INTO idProducto27;
+	WHERE "SCMPR_NOM_PROD"='Agregado fino zarandeado' INTO idProducto28;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='Agragado fino Chancado M' INTO idProducto28;
+	WHERE "SCMPR_NOM_PROD"='Agragado fino Chancado M' INTO idProducto29;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='Agregado fino zarandeado M' INTO idProducto29;
+	WHERE "SCMPR_NOM_PROD"='Agregado fino zarandeado M' INTO idProducto30;
 
 	  IF $4 ='H5' THEN
 	  
@@ -1689,19 +1715,22 @@ DECLARE
 		p2maxN100=0;
 		p2maxN200=0;
 	  
-	  
+	    IF $5 =1 THEN
 		SELECT insertar_huso(idProceso1,idProceso2,idProducto1,'H5',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
 		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
-		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert1;
-				
-		SELECT insertar_huso(idProceso1,idProceso2,idProducto2,'H5',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
-		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
+		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200) INTO insert1;
+		END IF;
+		
+        IF $6 =1 THEN		
+		SELECT insertar_huso(idProceso1,idProceso2,idProducto2,'H5',$2,$3,		
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
 		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
 		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert2;
-	  ELSIF $4 ='H6' THEN
+	    END IF;
+	 ELSIF $4 ='H6' THEN
 	  
 	    --A.G. chancado H6
 		p1min2=100;
@@ -1761,17 +1790,22 @@ DECLARE
 		p2maxN100=0;
 		p2maxN200=0;
 		
+		IF $5 =1 THEN
 		SELECT insertar_huso(idProceso1,idProceso2,idProducto3,'H6',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
 		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
-		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert3; 
-		
-		SELECT insertar_huso(idProceso1,idProceso2,idProducto4,'H6',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
-		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
+		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200) INTO insert3; 
+		END IF;
+		
+		IF $6 =1 THEN
+		SELECT insertar_huso(idProceso1,idProceso2,idProducto4,'H6',$2,$3,		
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
 		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
 		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert4; 
+	    END IF;
+	  
 	  ELSIF $4 ='H7' THEN
 	  
 		--A.G. chancado H7
@@ -1832,17 +1866,22 @@ DECLARE
 		p2maxN100=0;
 		p2maxN200=0;
 	  
+	    IF $5 =1 THEN
 		SELECT insertar_huso(idProceso1,idProceso2,idProducto5,'H7',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
 		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
-		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert5;
-		
-		SELECT insertar_huso(idProceso1,idProceso2,idProducto6,'H7',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
-		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
+		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200) INTO insert5;
+		END IF;
+		
+		IF $6 =1 THEN
+		SELECT insertar_huso(idProceso1,idProceso2,idProducto6,'H7',$2,$3,		
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
 		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
 		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert6;
+	    END IF;
+		
 	  ELSIF $4 ='H8' THEN
 	  
 		--A.G. chancado H8
@@ -1903,17 +1942,21 @@ DECLARE
 		p2maxN100=0;
 		p2maxN200=0;
 
+		IF $5 =1 THEN
 		SELECT insertar_huso(idProceso1,idProceso2,idProducto7,'H8',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
 		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
-		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert7;
-		
-		SELECT insertar_huso(idProceso1,idProceso2,idProducto8,'H8',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
-		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
+		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200) INTO insert7;
+		END IF;
+		
+		IF $6 =1 THEN
+		SELECT insertar_huso(idProceso1,idProceso2,idProducto8,'H8',$2,$3,		
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
 		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
 		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert8;
+	    END IF;
 	  ELSIF $4 ='H9' THEN
 	  
 		--A.F. chancado H9
@@ -1974,23 +2017,38 @@ DECLARE
 		p2maxN100=0;
 		p2maxN200=0;
 
+		IF $5 =1 THEN
 		SELECT insertar_huso(idProceso1,idProceso2,idProducto9,'H9',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
 		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
-		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert9;
-		
-		SELECT insertar_huso(idProceso1,idProceso2,idProducto10,'H9',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
-		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
+		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200) INTO insert9;
+		END IF;
+		
+		IF $6 =1 THEN
+		SELECT insertar_huso(idProceso1,idProceso2,idProducto10,'H9',$2,$3,		
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
 		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
 		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert10;
+		END IF;
 		
+		IF $7 =1 THEN
 		SELECT insertar_huso(idProceso1,idProceso2,idProducto11,'H9',$2,$3,		
-		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
-		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
 		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
 		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert11;
+		END IF;
+		
+		IF $8 =1 THEN
+		SELECT insertar_huso(idProceso1,idProceso2,idProducto12,'H9',$2,$3,		
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert12;
+		END IF;
+		
 	  ELSIF $4 ='H56' THEN
 	  
 		--A.G. chancado H56
@@ -2053,18 +2111,22 @@ DECLARE
 		p2maxN100=0;
 		p2maxN200=0;
 
-		SELECT insertar_huso(idProceso1,idProceso2,idProducto12,'H56',$2,$3,		
-		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
-		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
-		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert12;
-		
+		IF $5 =1 THEN
 		SELECT insertar_huso(idProceso1,idProceso2,idProducto13,'H56',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
 		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
+		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
+		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200) INTO insert13;
+		END IF;
+		
+		IF $6 =1 THEN
+		SELECT insertar_huso(idProceso1,idProceso2,idProducto14,'H56',$2,$3,		
 		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert13;
-	  ELSIF $4 ='H57' THEN
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert14;
+	    END IF;
+	 ELSIF $4 ='H57' THEN
 	  
 	    --A.G. chancado H57
 		p1min2=100;
@@ -2124,23 +2186,29 @@ DECLARE
 		p2maxN100=0;
 		p2maxN200=0;
 
-		SELECT insertar_huso(idProceso1,idProceso2,idProducto14,'H57',$2,$3,		
-		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
-		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
-		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert14;
-		
+		IF $5 =1 THEN
 		SELECT insertar_huso(idProceso1,idProceso2,idProducto15,'H57',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
 		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
-		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert15;
-		
-		SELECT insertar_huso(idProceso1,idProceso2,idProducto16,'H57',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
-		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
+		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200) INTO insert15;
+		END IF;
+		
+		IF $6 =1 THEN
+		SELECT insertar_huso(idProceso1,idProceso2,idProducto16,'H57',$2,$3,		
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
 		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
 		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert16;
+		END IF;
+		
+		IF $7 =1 THEN
+		SELECT insertar_huso(idProceso1,idProceso2,idProducto17,'H57',$2,$3,		
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert17;
+	    END IF;
 	  ELSIF $4 ='H67' THEN
 	  
 		--A.G. chancado H67
@@ -2202,23 +2270,29 @@ DECLARE
 		p2maxN100=0;
 		p2maxN200=0;
 
-		SELECT insertar_huso(idProceso1,idProceso2,idProducto17,'H67',$2,$3,		
-		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
-		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
-		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert17;
-		
+		IF $5 =1 THEN
 		SELECT insertar_huso(idProceso1,idProceso2,idProducto18,'H67',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
 		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
-		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert18;
-		
-		SELECT insertar_huso(idProceso1,idProceso2,idProducto19,'H67',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
-		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
+		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200) INTO insert18;
+		END IF;
+		
+		IF $6 =1 THEN
+		SELECT insertar_huso(idProceso1,idProceso2,idProducto19,'H67',$2,$3,		
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
 		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
 		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert19;
+		END IF;
+		
+		IF $7 =1 THEN
+		SELECT insertar_huso(idProceso1,idProceso2,idProducto20,'H67',$2,$3,		
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert20;
+	    END IF;
 	  ELSIF $4 ='H89' THEN
 	  
 	  --A.G. chancado H89
@@ -2280,17 +2354,21 @@ DECLARE
 		p2maxN100=0;
 		p2maxN200=0;
 	  
-		SELECT insertar_huso(idProceso1,idProceso2,idProducto20,'H89',$2,$3,		
-		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
-		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
-		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert20;
-		
+	    IF $5 =1 THEN
 		SELECT insertar_huso(idProceso1,idProceso2,idProducto21,'H89',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
 		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
+		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
+		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200) INTO insert21;
+		END IF;
+		
+		IF $6 =1 THEN
+		SELECT insertar_huso(idProceso1,idProceso2,idProducto22,'H89',$2,$3,		
 		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert21;
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert22;
+	    END IF;
 	  ELSIF $4 ='H467' THEN
 	  
 	    --A.G. chancado H467
@@ -2351,18 +2429,22 @@ DECLARE
 		p2maxN100=0;
 		p2maxN200=0;
 
-		SELECT insertar_huso(idProceso1,idProceso2,idProducto22,'H467',$2,$3,		
-		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
-		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
-		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert22;
-		
+		IF $5 =1 THEN
 		SELECT insertar_huso(idProceso1,idProceso2,idProducto23,'H467',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
 		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
+		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
+		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200) INTO insert23;
+		END IF;
+		
+		IF $6 =1 THEN
+		SELECT insertar_huso(idProceso1,idProceso2,idProducto24,'H467',$2,$3,		
 		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert23;
-	  ELSIF $4 ='H4' THEN
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert24;
+	    END IF;
+	 ELSIF $4 ='H4' THEN
 	  
 		--A.G. chancado H4
 		p1min2=100;
@@ -2422,18 +2504,22 @@ DECLARE
 		p2maxN100=0;
 		p2maxN200=0;
 
-		SELECT insertar_huso(idProceso1,idProceso2,idProducto24,'H4',$2,$3,		
-		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
-		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
-		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert24;
-		
+		IF $5 =1 THEN
 		SELECT insertar_huso(idProceso1,idProceso2,idProducto25,'H4',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
 		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
+		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
+		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200) INTO insert25;
+		END IF;
+		
+		IF $6 =1 THEN
+		SELECT insertar_huso(idProceso1,idProceso2,idProducto26,'H4',$2,$3,		
 		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert25;
-        
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert26;
+        END IF;
+		
 		ELSIF $4 ='AF' THEN
 		  
 		--Agregado fino Chancado
@@ -2497,17 +2583,21 @@ DECLARE
 		p2maxN200=5;
 
 
-		SELECT insertar_huso(idProceso1,idProceso2,idProducto26,'AF',$2,$3,		
-		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
-		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
-		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert26;
-		
+		IF $5 =1 THEN
 		SELECT insertar_huso(idProceso1,idProceso2,idProducto27,'AF',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
 		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
+		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
+		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200) INTO insert27;
+		END IF;
+		
+		IF $6 =1 THEN
+		SELECT insertar_huso(idProceso1,idProceso2,idProducto28,'AF',$2,$3,		
 		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert27;
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert28;
+		END IF;
 		
 		ELSIF $4 ='AFM' THEN
 
@@ -2570,29 +2660,333 @@ DECLARE
 		p2maxN200=5;
 
 
-		
-		SELECT insertar_huso(idProceso1,idProceso2,idProducto28,'AFM',$2,$3,		
-		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
-		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
-		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert28;
-		
+		IF $5 =1 THEN
 		SELECT insertar_huso(idProceso1,idProceso2,idProducto29,'AFM',$2,$3,		
 		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
 		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
+        p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
+		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200) INTO insert29;
+		END IF;
+		
+		IF $6 =1 THEN		
+		SELECT insertar_huso(idProceso1,idProceso2,idProducto30,'AFM',$2,$3,		
 		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
-		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert29;
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
+		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
+		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert30;
+	    END IF;
 	  END IF;
 
-	RETURN 'OK';						  
+	RETURN '1';						  
    
            
  END;
  $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
-ALTER FUNCTION insertar_huso_x_planta(character, numeric, numeric,character) OWNER TO postgres;
+ALTER FUNCTION insertar_huso_x_planta(character, numeric, numeric, character, numeric, numeric, numeric, numeric) OWNER TO postgres;
 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Function: insertartodohusos()
+
+-- DROP FUNCTION insertartodohusos();
+
+CREATE OR REPLACE FUNCTION insertartodohusos()
+  RETURNS character varying AS
+$BODY$
+DECLARE    
+
+  insert1 numeric:=0;  
+  
+
+ BEGIN     
+
+ --1.-'A.G. chancado TMN=1" a 1/2" - H5';
+ --2.-'A.G. zarandeado TMN=1" a 1/2" - H5' 
+SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H5',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/4" a 3/8" - H6'
+ --2.-'A.G. zarandeado TMN=3/4" a 3/8" - H6' 
+SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H6',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=1/2" a No. 4 - H7'  
+ --2.-'A.G. zarandeado TMN=1/2" a No. 4 - H7'
+SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H7',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/8" a No. 8 - H8'  
+ --2.-'A.G. zarandeado TMN=3/8" a No. 8 - H8' 
+SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H8',1,1,0,0) INTO insert1;
+ --1.-'Agregado fino chancado - H9'
+ --2.-'Agregado fino zarandeado - H9' 
+ --3.-'A.G. chancado TMN=No. 4 a No. 16 - H9' 
+ --4.-'A.G. zarandeado TMN=No. 4 a No. 16 - H9'
+SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H9',1,0,1,1) INTO insert1;
+ --1.-'A.G. chancado TMN=1" a 3/8" - H56' 
+ --2.-'A.G. zarandeado TMN=1" a 3/8" - H56' 
+SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H56',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=1" a No. 4 - H57' 
+ --2.-'A.G. zarandeado TMN=1" a No. 4 - H57' 
+ --3.-'A.G. zarandeado B TMN=1" a No. 4 - H57' 
+SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H57',1,1,1,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/4" a No. 4 - H67'    
+ --2.-'A.G. zarandeado TMN=3/4" a No. 4 - H67'
+ --3.-'A.G. zarandeado B TMN=3/4" a No. 4 - H67' 
+SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H67',1,1,1,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/8" a No. 16 - H89'   
+ --2.-'A.G. zarandeado TMN=3/8" a No. 16 - H89' 
+SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H89',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=1 1/2 a No. 4 - H467'  
+ --2.-'A.G. zarandeado TMN=1 1/2 a No. 4 - H467'  
+SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H467',1,1,0,0) INTO insert1;
+ --1.-'A. Grueso chancado TMN=1/2" a 3/4" - H4"' 
+ --2.-'A. Grueso zarandeado TMN=1/2" a 3/4" - H4"'
+SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H4',1,1,0,0) INTO insert1;
+ --1.-'Agragado fino Chancado'   
+ --2.-'Agregado fino zarandeado'
+SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'AF',1,1,0,0) INTO insert1;
+ --1.-'Agragado fino Chancado M'  
+ --2.-'Agregado fino zarandeado M' 
+SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'AFM',1,1,0,0) INTO insert1;
+
+
+
+ --1.-'A.G. chancado TMN=1" a 1/2" - H5';
+ --2.-'A.G. zarandeado TMN=1" a 1/2" - H5' 
+SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H5',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/4" a 3/8" - H6'
+ --2.-'A.G. zarandeado TMN=3/4" a 3/8" - H6' 
+SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H6',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=1/2" a No. 4 - H7'  
+ --2.-'A.G. zarandeado TMN=1/2" a No. 4 - H7'
+SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H7',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/8" a No. 8 - H8'  
+ --2.-'A.G. zarandeado TMN=3/8" a No. 8 - H8' 
+SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H8',1,1,0,0) INTO insert1;
+ --1.-'Agregado fino chancado - H9'
+ --2.-'Agregado fino zarandeado - H9' 
+ --3.-'A.G. chancado TMN=No. 4 a No. 16 - H9' 
+ --4.-'A.G. zarandeado TMN=No. 4 a No. 16 - H9'
+SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H9',1,0,1,1) INTO insert1;
+ --1.-'A.G. chancado TMN=1" a 3/8" - H56' 
+ --2.-'A.G. zarandeado TMN=1" a 3/8" - H56' 
+SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H56',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=1" a No. 4 - H57' 
+ --2.-'A.G. zarandeado TMN=1" a No. 4 - H57' 
+ --3.-'A.G. zarandeado B TMN=1" a No. 4 - H57' 
+SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H57',1,1,10,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/4" a No. 4 - H67'    
+ --2.-'A.G. zarandeado TMN=3/4" a No. 4 - H67'
+ --3.-'A.G. zarandeado B TMN=3/4" a No. 4 - H67' 
+SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H67',1,1,1,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/8" a No. 16 - H89'   
+ --2.-'A.G. zarandeado TMN=3/8" a No. 16 - H89' 
+SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H89',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=1 1/2 a No. 4 - H467'  
+ --2.-'A.G. zarandeado TMN=1 1/2 a No. 4 - H467' 
+SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H467',1,1,0,0) INTO insert1;
+ --1.-'A. Grueso chancado TMN=1/2" a 3/4" - H4"' 
+ --2.-'A. Grueso zarandeado TMN=1/2" a 3/4" - H4"'
+SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H4',1,1,0,0) INTO insert1;
+ --1.-'Agragado fino Chancado'   
+ --2.-'Agregado fino zarandeado'
+SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'AF',1,1,0,0) INTO insert1; 
+ --1.-'Agragado fino Chancado M'  
+ --2.-'Agregado fino zarandeado M' 
+SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'AFM',1,1,0,0) INTO insert1; 
+
+
+
+ --1.-'A.G. chancado TMN=1" a 1/2" - H5';
+ --2.-'A.G. zarandeado TMN=1" a 1/2" - H5' 
+SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H5',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/4" a 3/8" - H6'
+ --2.-'A.G. zarandeado TMN=3/4" a 3/8" - H6' 
+SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H6',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=1/2" a No. 4 - H7'  
+ --2.-'A.G. zarandeado TMN=1/2" a No. 4 - H7'
+SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H7',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/8" a No. 8 - H8'  
+ --2.-'A.G. zarandeado TMN=3/8" a No. 8 - H8' 
+SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H8',1,1,0,0) INTO insert1;
+ --1.-'Agregado fino chancado - H9'
+ --2.-'Agregado fino zarandeado - H9' 
+ --3.-'A.G. chancado TMN=No. 4 a No. 16 - H9' 
+ --4.-'A.G. zarandeado TMN=No. 4 a No. 16 - H9'
+SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H9',1,0,1,1) INTO insert1;
+ --1.-'A.G. chancado TMN=1" a 3/8" - H56' 
+ --2.-'A.G. zarandeado TMN=1" a 3/8" - H56' 
+SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H56',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=1" a No. 4 - H57' 
+ --2.-'A.G. zarandeado TMN=1" a No. 4 - H57' 
+ --3.-'A.G. zarandeado B TMN=1" a No. 4 - H57' 
+SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H57',1,1,1,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/4" a No. 4 - H67'    
+ --2.-'A.G. zarandeado TMN=3/4" a No. 4 - H67'
+ --3.-'A.G. zarandeado B TMN=3/4" a No. 4 - H67' 
+SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H67',1,1,1,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/8" a No. 16 - H89'   
+ --2.-'A.G. zarandeado TMN=3/8" a No. 16 - H89' 
+SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H89',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=1 1/2 a No. 4 - H467'  
+ --2.-'A.G. zarandeado TMN=1 1/2 a No. 4 - H467' 
+SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H467',1,1,0,0) INTO insert1;
+ --1.-'A. Grueso chancado TMN=1/2" a 3/4" - H4"' 
+ --2.-'A. Grueso zarandeado TMN=1/2" a 3/4" - H4"'
+SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H4',1,1,0,0) INTO insert1; 
+ --1.-'Agragado fino Chancado'   
+ --2.-'Agregado fino zarandeado'
+SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'AF',1,1,0,0) INTO insert1; 
+ --1.-'Agragado fino Chancado M'  
+ --2.-'Agregado fino zarandeado M' 
+SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'AFM',1,1,0,0) INTO insert1;
+
+
+
+ --1.-'A.G. chancado TMN=1" a 1/2" - H5';
+ --2.-'A.G. zarandeado TMN=1" a 1/2" - H5' 
+SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H5',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/4" a 3/8" - H6'
+ --2.-'A.G. zarandeado TMN=3/4" a 3/8" - H6' 
+SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H6',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=1/2" a No. 4 - H7'  
+ --2.-'A.G. zarandeado TMN=1/2" a No. 4 - H7'
+SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H7',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/8" a No. 8 - H8'  
+ --2.-'A.G. zarandeado TMN=3/8" a No. 8 - H8' 
+SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H8',1,1,0,0) INTO insert1;
+ --1.-'Agregado fino chancado - H9'
+ --2.-'Agregado fino zarandeado - H9' 
+ --3.-'A.G. chancado TMN=No. 4 a No. 16 - H9' 
+ --4.-'A.G. zarandeado TMN=No. 4 a No. 16 - H9'
+SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H9',1,0,1,1) INTO insert1;
+ --1.-'A.G. chancado TMN=1" a 3/8" - H56' 
+ --2.-'A.G. zarandeado TMN=1" a 3/8" - H56' 
+SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H56',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=1" a No. 4 - H57' 
+ --2.-'A.G. zarandeado TMN=1" a No. 4 - H57' 
+ --3.-'A.G. zarandeado B TMN=1" a No. 4 - H57' 
+SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H57',1,1,1,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/4" a No. 4 - H67'    
+ --2.-'A.G. zarandeado TMN=3/4" a No. 4 - H67'
+ --3.-'A.G. zarandeado B TMN=3/4" a No. 4 - H67' 
+SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H67',1,1,1,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/8" a No. 16 - H89'   
+ --2.-'A.G. zarandeado TMN=3/8" a No. 16 - H89' 
+SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H89',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=1 1/2 a No. 4 - H467'  
+ --2.-'A.G. zarandeado TMN=1 1/2 a No. 4 - H467' 
+SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H467',1,1,0,0) INTO insert1;
+ --1.-'A. Grueso chancado TMN=1/2" a 3/4" - H4"' 
+ --2.-'A. Grueso zarandeado TMN=1/2" a 3/4" - H4"'
+SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H4',1,1,0,0) INTO insert1;
+ --1.-'Agragado fino Chancado'   
+ --2.-'Agregado fino zarandeado'
+SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'AF',1,1,0,0) INTO insert1; 
+ --1.-'Agragado fino Chancado M'  
+ --2.-'Agregado fino zarandeado M' 
+SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'AFM',1,1,0,0) INTO insert1;
+
+
+
+ --1.-'A.G. chancado TMN=1" a 1/2" - H5';
+ --2.-'A.G. zarandeado TMN=1" a 1/2" - H5' 
+SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H5',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/4" a 3/8" - H6'
+ --2.-'A.G. zarandeado TMN=3/4" a 3/8" - H6' 
+SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H6',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=1/2" a No. 4 - H7'  
+ --2.-'A.G. zarandeado TMN=1/2" a No. 4 - H7'
+SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H7',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/8" a No. 8 - H8'  
+ --2.-'A.G. zarandeado TMN=3/8" a No. 8 - H8' 
+SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H8',1,1,0,0) INTO insert1;
+ --1.-'Agregado fino chancado - H9'
+ --2.-'Agregado fino zarandeado - H9' 
+ --3.-'A.G. chancado TMN=No. 4 a No. 16 - H9' 
+ --4.-'A.G. zarandeado TMN=No. 4 a No. 16 - H9'
+SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H9',1,0,1,1) INTO insert1;
+ --1.-'A.G. chancado TMN=1" a 3/8" - H56' 
+ --2.-'A.G. zarandeado TMN=1" a 3/8" - H56' 
+SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H56',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=1" a No. 4 - H57' 
+ --2.-'A.G. zarandeado TMN=1" a No. 4 - H57' 
+ --3.-'A.G. zarandeado B TMN=1" a No. 4 - H57' 
+SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H57',1,1,1,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/4" a No. 4 - H67'    
+ --2.-'A.G. zarandeado TMN=3/4" a No. 4 - H67'
+ --3.-'A.G. zarandeado B TMN=3/4" a No. 4 - H67' 
+SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H67',1,1,1,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/8" a No. 16 - H89'   
+ --2.-'A.G. zarandeado TMN=3/8" a No. 16 - H89' 
+SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H89',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=1 1/2 a No. 4 - H467'  
+ --2.-'A.G. zarandeado TMN=1 1/2 a No. 4 - H467' 
+SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H467',1,1,0,0) INTO insert1;
+ --1.-'A. Grueso chancado TMN=1/2" a 3/4" - H4"' 
+ --2.-'A. Grueso zarandeado TMN=1/2" a 3/4" - H4"'
+SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H4',1,1,0,0) INTO insert1; 
+ --1.-'Agragado fino Chancado'   
+ --2.-'Agregado fino zarandeado'
+SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'AF',1,1,0,0) INTO insert1; 
+ --1.-'Agragado fino Chancado M'  
+ --2.-'Agregado fino zarandeado M' 
+SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'AFM',1,1,0,0) INTO insert1; 
+
+
+
+ --1.-'A.G. chancado TMN=1" a 1/2" - H5';
+ --2.-'A.G. zarandeado TMN=1" a 1/2" - H5' 
+SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H5',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/4" a 3/8" - H6'
+ --2.-'A.G. zarandeado TMN=3/4" a 3/8" - H6' 
+SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H6',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=1/2" a No. 4 - H7'  
+ --2.-'A.G. zarandeado TMN=1/2" a No. 4 - H7'
+SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H7',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/8" a No. 8 - H8'  
+ --2.-'A.G. zarandeado TMN=3/8" a No. 8 - H8' 
+SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H8',1,1,0,0) INTO insert1;
+ --1.-'Agregado fino chancado - H9'
+ --2.-'Agregado fino zarandeado - H9' 
+ --3.-'A.G. chancado TMN=No. 4 a No. 16 - H9' 
+ --4.-'A.G. zarandeado TMN=No. 4 a No. 16 - H9'
+SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H9',1,0,1,1) INTO insert1;
+ --1.-'A.G. chancado TMN=1" a 3/8" - H56' 
+ --2.-'A.G. zarandeado TMN=1" a 3/8" - H56' 
+SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H56',1,1,0,0) INTO insert1; 
+ --1.-'A.G. chancado TMN=1" a No. 4 - H57' 
+ --2.-'A.G. zarandeado TMN=1" a No. 4 - H57' 
+ --3.-'A.G. zarandeado B TMN=1" a No. 4 - H57' 
+SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H57',1,1,1,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/4" a No. 4 - H67'    
+ --2.-'A.G. zarandeado TMN=3/4" a No. 4 - H67'
+ --3.-'A.G. zarandeado B TMN=3/4" a No. 4 - H67' 
+SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H67',1,1,1,0) INTO insert1;
+ --1.-'A.G. chancado TMN=3/8" a No. 16 - H89'   
+ --2.-'A.G. zarandeado TMN=3/8" a No. 16 - H89' 
+SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H89',1,1,0,0) INTO insert1;
+ --1.-'A.G. chancado TMN=1 1/2 a No. 4 - H467'  
+ --2.-'A.G. zarandeado TMN=1 1/2 a No. 4 - H467' 
+SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H467',1,1,0,0) INTO insert1;
+ --1.-'A. Grueso chancado TMN=1/2" a 3/4" - H4"' 
+ --2.-'A. Grueso zarandeado TMN=1/2" a 3/4" - H4"'
+SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H4',1,1,0,0) INTO insert1; 
+ --1.-'Agragado fino Chancado'   
+ --2.-'Agregado fino zarandeado'
+SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'AF',1,1,0,0) INTO insert1; 
+ --1.-'Agragado fino Chancado M'  
+ --2.-'Agregado fino zarandeado M' 
+SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'AFM',1,1,0,0) INTO insert1; 				  
+
+  RETURN '1';     
+          
+ END;
+ $BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION insertartodohusos() OWNER TO postgres;
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Select insertarTodoHusos();
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -2638,130 +3032,57 @@ ALTER FUNCTION insertar_max_min(numeric, numeric, numeric, numeric, character) O
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
---DATA--
+-- Function: insertar_max_min(numeric, numeric, numeric, numeric, character)
 
-INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'A.G. chancado TMN=1/2" a 3/4" - H4','H4','A.G. chancado TMN=1/2" a 3/4" - H4','AGR','ACT');	
+-- DROP FUNCTION insertar_max_min(numeric, numeric, numeric, numeric, character);
 
-INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'A.G. zarandeado TMN=1/2" a 3/4','H4','A.G. zarandeado TMN=1/2" a 3/4','AGR','ACT');
+CREATE OR REPLACE FUNCTION insertar_max_min(numeric, numeric, numeric, numeric, character)
+  RETURNS character varying AS
+$BODY$
+DECLARE        
+
+       idTipoEnsa numeric:=0;
+ BEGIN     
+
+
+
+	SELECT "SCMTE_IDE_TIPO_ENSA_K" FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" TE  
+	  LEFT JOIN "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" GE   ON TE."SCMGT_IDE_GRUP_TIPO_ENSA_K"=GE."SCMGT_IDE_GRUP_TIPO_ENSA_K"
+	  LEFT JOIN "CPSAA"."GESAC_MAE_MATR_TRAT" MT ON MT."SCMMT_IDE_MATR_TRAT_K"=GE."SCMMT_IDE_MATR_TRAT_K"  
+	  WHERE "SCMPR_IDE_PROD_K"=$1 AND "SCMPC_IDE_PROC_K"=$2
+	  AND "SCMTE_NOM_TIPO_ENSA" = $5 INTO idTipoEnsa;
+
+
+
+	UPDATE "CPSAA"."GESAC_MOV_CONT" 
+	SET "SCMOC_VLR_CONT_SUP_PRO"=$3,
+	    "SCMOC_VLR_CONT_INF_PRO"=$4
+	WHERE "SCMTE_IDE_TIPO_ENSA_K"=idTipoEnsa;
+
 							  
-INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agragado fino Chancado','AF','Agragado fino Chancado','AGR','ACT');
-							  
-INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agregado fino zarandeado','AF','Agregado fino zarandeado','AGR','ACT');							  
-							  
-INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agragado fino Chancado M','AF','Agragado fino Chancado M','AGR','ACT');
-							  
-INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agregado fino zarandeado M','AF','Agregado fino zarandeado M','AGR','ACT');
 
+  RETURN 'GAME OVER';     
+           
+ END;
+ $BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION insertar_max_min(numeric, numeric, numeric, numeric, character) OWNER TO postgres;
 
---SELECT insertar_huso_X_planta(PLANATA , PROCESO AGREGADO , PROCeSO ZARANDEO );
-
---1: habilitado ;  0: desabilitado
-
-
-SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H5');
-SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H6');
-SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H7');
-SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H8');
-SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H9');
-SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H56');
-SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H57');
-SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H67');
-SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H89');
-SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H467');
-SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H4'); 
-SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'AF'); 
-SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'AFM'); 
-
-SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H5');
-SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H6');
-SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H7');
-SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H8');
-SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H9');
-SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H56'); 
-SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H57');
-SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H67');
-SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H89');
-SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H467');
-SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H4'); 
-SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'AF'); 
-SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'AFM'); 
-
-SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H5');
-SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H6');
-SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H7');
-SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H8');
-SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H9');
-SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H56'); 
-SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H57');
-SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H67');
-SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H89');
-SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H467');
-SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H4'); 
-SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'AF'); 
-SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'AFM'); 
-
-
-SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H5');
-SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H6');
-SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H7');
-SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H8');
-SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H9');
-SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H56'); 
-SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H57');
-SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H67');
-SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H89');
-SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H467');
-SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H4'); 
-SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'AF'); 
-SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'AFM'); 
-
-
-SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H5');
-SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H6');
-SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H7');
-SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H8');
-SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H9');
-SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H56') 
-SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H57');
-SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H67');
-SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H89');
-SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H467');
-SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H4'); 
-SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'AF'); 
-SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'AFM'); 
-
-SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H5');
-SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H6');
-SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H7');
-SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H8');
-SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H9');
-SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H56'); 
-SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H57');
-SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H67');
-SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H89');
-SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H467');
-SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H4'); 
-SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'AF'); 
-SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'AFM'); 
+----------------------------------------------------------------------------------------------------------------------------------
 
 -----FUNCTION insertar_max_min(id_prod, id_proce, maximo, minimo, nombre_tipo_ensayo);
-select insertar_max_min(561, 50, 100, 100, '2"')
-select insertar_max_min(561, 50, 100, 100, '1 1/2"')
-select insertar_max_min(561, 50, 100, 100, '1"')
-select insertar_max_min(561, 50, 100, 100, '3/4"')
-select insertar_max_min(561, 50, 100, 100, '1/2"')
-select insertar_max_min(561, 50, 100, 100, '3/8"')
-select insertar_max_min(561, 50, 100, 95, 'N°4')
-select insertar_max_min(561, 50, 100, 80, 'N°8')
-select insertar_max_min(561, 50, 85, 50, 'N°16')
-select insertar_max_min(561, 50, 60, 25, 'N°30')
-select insertar_max_min(561, 50, 30, 5, 'N°50')
-select insertar_max_min(561, 50, 10, 0, 'N°100')
-select insertar_max_min(561, 50, 5, 0, 'N°200')
-select insertar_max_min(561, 50, 0, 0, 'Fondo')
+select insertar_max_min(561, 50, 100, 100, '2"');
+select insertar_max_min(561, 50, 100, 100, '1 1/2"');
+select insertar_max_min(561, 50, 100, 100, '1"');
+select insertar_max_min(561, 50, 100, 100, '3/4"');
+select insertar_max_min(561, 50, 100, 100, '1/2"');
+select insertar_max_min(561, 50, 100, 100, '3/8"');
+select insertar_max_min(561, 50, 100, 95, 'N°4');
+select insertar_max_min(561, 50, 100, 80, 'N°8');
+select insertar_max_min(561, 50, 85, 50, 'N°16');
+select insertar_max_min(561, 50, 60, 25, 'N°30');
+select insertar_max_min(561, 50, 30, 5, 'N°50');
+select insertar_max_min(561, 50, 10, 0, 'N°100');
+select insertar_max_min(561, 50, 5, 0, 'N°200');
+select insertar_max_min(561, 50, 0, 0, 'Fondo');
