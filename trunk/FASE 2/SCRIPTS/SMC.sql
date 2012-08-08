@@ -884,6 +884,41 @@ ALTER TABLE "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" ALTER COLUMN "SCMGT_COC_HUS" TYPE
 ---
 
 
+------------------------------------------------------------------------------------------------------------------------------------------
+
+DATA HUSOS
+
+
+
+INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
+                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'A.G. chancado TMN=1/2" a 3/4" - H4','H4','A.G. chancado TMN=1/2" a 3/4" - H4','AGR','ACT');	
+
+INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
+                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'A.G. zarandeado TMN=1/2" a 3/4" - H4','H4','A.G. zarandeado TMN=1/2" a 3/4" - H4','AGR','ACT');
+							  
+INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
+                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agragado fino Chancado','AF','Agragado fino Chancado','AGR','ACT');
+							  
+INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
+                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agregado fino zarandeado','AF','Agregado fino zarandeado','AGR','ACT');							  
+							  
+INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
+                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agragado fino Chancado M','AF','Agragado fino Chancado M','AGR','ACT');
+							  
+INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
+                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agregado fino zarandeado M','AF','Agregado fino zarandeado M','AGR','ACT');
+
+INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST")  
+                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'AfNat M.Albañ.','AN','AfNat M.Albañ.','AGR','ACT');     
+ 
+INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST")  
+                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'AfMan M.Albañ.','AM','AfMan M.Albañ.','AGR','ACT');
+
+UPDATE "CPSAA"."GESAC_MAE_PROD" SET "SCMPR_NOM_PROD"='A.G. chancado TMN=1 1/2" a No. 4 - H467' WHERE "SCMPR_NOM_PROD"='A.G. chancado TMN=1 1/2 a No. 4 - H467';
+
+UPDATE "CPSAA"."GESAC_MAE_PROD" SET "SCMPR_NOM_PROD"='A.G. zarandeado TMN=1 1/2" a No. 4 - H467' WHERE "SCMPR_NOM_PROD"='A.G. zarandeado TMN=1 1/2 a No. 4 - H467';
+							  
+
 -- Function: insertar_huso(numeric, numeric, numeric, character, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric)
 
 -- DROP FUNCTION insertar_huso(numeric, numeric, numeric, character, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric);
@@ -1392,28 +1427,6 @@ DECLARE
   COST 100;
 ALTER FUNCTION insertar_huso(numeric, numeric, numeric, character, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric, numeric) OWNER TO postgres;
 
-------------------------------------------------------------------------------------------------------------------------------------------
-
-							  
-INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'A.G. chancado TMN=1/2" a 3/4" - H4','H4','A.G. chancado TMN=1/2" a 3/4" - H4','AGR','ACT');	
-
-INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'A.G. zarandeado TMN=1/2" a 3/4','H4','A.G. zarandeado TMN=1/2" a 3/4','AGR','ACT');
-							  
-INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agragado fino Chancado','AF','Agragado fino Chancado','AGR','ACT');
-							  
-INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agregado fino zarandeado','AF','Agregado fino zarandeado','AGR','ACT');							  
-							  
-INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agragado fino Chancado M','AF','Agragado fino Chancado M','AGR','ACT');
-							  
-INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agregado fino zarandeado M','AF','Agregado fino zarandeado M','AGR','ACT');
-
-------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Function: insertar_huso_x_planta(character, numeric, numeric, character, numeric, numeric, numeric, numeric)
 
@@ -1456,6 +1469,8 @@ DECLARE
        idProducto28 numeric:=0;
        idProducto29 numeric:=0;
 	   idProducto30 numeric:=0;
+idProducto31 numeric:=0;
+idProducto32 numeric:=0;
        
        insert1 character;
        insert2 character;
@@ -1487,6 +1502,8 @@ DECLARE
        insert28 character;
        insert29 character;
 	   insert30 character;
+	   insert31 character;
+	   insert32 character;
 	   
 	
 		p1min2 numeric:=0;
@@ -1632,10 +1649,10 @@ DECLARE
 	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado TMN=3/8" a No. 16 - H89' INTO idProducto22;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='A.G. chancado TMN=1 1/2 a No. 4 - H467' INTO idProducto23;
+	WHERE "SCMPR_NOM_PROD"='A.G. chancado TMN=1 1/2" a No. 4 - H467' INTO idProducto23;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
-	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado TMN=1 1/2 a No. 4 - H467' INTO idProducto24;
+	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado TMN=1 1/2" a No. 4 - H467' INTO idProducto24;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
 	WHERE "SCMPR_NOM_PROD"='A.G. chancado TMN=1/2" a 3/4" - H4' INTO idProducto25;
@@ -1643,7 +1660,7 @@ DECLARE
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
 	WHERE "SCMPR_NOM_PROD"='A.G. zarandeado TMN=1/2" a 3/4" - H4' INTO idProducto26;
 
-        SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
+    SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
 	WHERE "SCMPR_NOM_PROD"='Agragado fino Chancado' INTO idProducto27;
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
@@ -1654,6 +1671,13 @@ DECLARE
 
 	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
 	WHERE "SCMPR_NOM_PROD"='Agregado fino zarandeado M' INTO idProducto30;
+	
+	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
+	WHERE "SCMPR_NOM_PROD"='AfNat M.Albañ.'  INTO idProducto31;
+	
+	SELECT "SCMPR_IDE_PROD_K" FROM "CPSAA"."GESAC_MAE_PROD" 
+	WHERE "SCMPR_NOM_PROD"='AfMan M.Albañ.'  INTO idProducto32;
+ 
 
 	  IF $4 ='H5' THEN
 	  
@@ -2608,12 +2632,12 @@ DECLARE
 		p1min34=100;
 		p1min12=100;
 		p1min38=100;
-		p1minN4=95;
-		p1minN8=80;
-		p1minN16=50;
-		p1minN30=25;
-		p1minN50=5;
-		p1minN100=0;
+		p1minN4=100;
+		p1minN8=95;
+		p1minN16=70;
+		p1minN30=40;
+		p1minN50=20;
+		p1minN100=10;
 		p1minN200=0;
 
 		p1max2=100;
@@ -2624,11 +2648,11 @@ DECLARE
 		p1max38=100;
 		p1maxN4=100;
 		p1maxN8=100;
-		p1maxN16=85;
-		p1maxN30=60;
-		p1maxN50=30;
-		p1maxN100=10;
-		p1maxN200=5;
+		p1maxN16=100;
+		p1maxN30=75;
+		p1maxN50=40;
+		p1maxN100=25;
+		p1maxN200=10;
 		
 		--Agregado fino zarandeado M
 		p2min2=100;
@@ -2637,12 +2661,12 @@ DECLARE
 		p2min34=100;
 		p2min12=100;
 		p2min38=100;
-		p2minN4=95;
-		p2minN8=80;
-		p2minN16=50;
-		p2minN30=25;
-		p2minN50=5;
-		p2minN100=0;
+		p2minN4=100;
+		p2minN8=95;
+		p2minN16=70;
+		p2minN30=40;
+		p2minN50=10;
+		p2minN100=2;
 		p2minN200=0;
 
 		p2max2=100;
@@ -2653,10 +2677,10 @@ DECLARE
 		p2max38=100;
 		p2maxN4=100;
 		p2maxN8=100;
-		p2maxN16=85;
-		p2maxN30=60;
-		p2maxN50=30;
-		p2maxN100=10;
+		p2maxN16=100;
+		p2maxN30=75;
+		p2maxN50=35;
+		p2maxN100=15;
 		p2maxN200=5;
 
 
@@ -2674,7 +2698,88 @@ DECLARE
 		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
 		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
 		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert30;
-	    END IF;
+	   
+	    ELSIF $4 ='AN' THEN
+
+		--AfNat M.Albañ. - AN
+		p1min2=100;
+		p1min112=100;
+		p1min1=100;
+		p1min34=100;
+		p1min12=100;
+		p1min38=100;
+		p1minN4=100;
+		p1minN8=95;
+		p1minN16=70;
+		p1minN30=40;
+		p1minN50=10;
+		p1minN100=2;
+		p1minN200=0;
+
+		p1max2=100;
+		p1max112=100;
+		p1max1=100;
+		p1max34=100;
+		p1max12=100;
+		p1max38=100;
+		p1maxN4=100;
+		p1maxN8=100;
+		p1maxN16=100;
+		p1maxN30=75;
+		p1maxN50=35;
+		p1maxN100=15;
+		p1maxN200=5;
+
+
+		IF $5 =1 THEN
+		SELECT insertar_huso(idProceso1,idProceso2,idProducto31,'AN',$2,$3,		
+		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
+		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
+        p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
+		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200) INTO insert31;
+		END IF;
+		
+        ELSIF $4 ='AM' THEN
+
+		--AfMan M.Albañ. - AM
+		p1min2=100;
+		p1min112=100;
+		p1min1=100;
+		p1min34=100;
+		p1min12=100;
+		p1min38=100;
+		p1minN4=100;
+		p1minN8=95;
+		p1minN16=70;
+		p1minN30=40;
+		p1minN50=20;
+		p1minN100=10;
+		p1minN200=0;
+
+		p1max2=100;
+		p1max112=100;
+		p1max1=100;
+		p1max34=100;
+		p1max12=100;
+		p1max38=100;
+		p1maxN4=100;
+		p1maxN8=100;
+		p1maxN16=100;
+		p1maxN30=75;
+		p1maxN50=40;
+		p1maxN100=25;
+		p1maxN200=10;
+		
+
+		IF $5 =1 THEN
+		SELECT insertar_huso(idProceso1,idProceso2,idProducto32,'AM',$2,$3,		
+		p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
+		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
+        p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
+		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200) INTO insert32;
+		END IF;
+
+	   END IF;
 	  END IF;
 
 	RETURN '1';						  
@@ -2686,7 +2791,9 @@ DECLARE
   COST 100;
 ALTER FUNCTION insertar_huso_x_planta(character, numeric, numeric, character, numeric, numeric, numeric, numeric) OWNER TO postgres;
 
--------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+---------------------------------------------------------------------
 
 -- Function: insertartodohusos()
 
@@ -2729,7 +2836,7 @@ SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H57',1,1,1,0) INTO i
  --1.-'A.G. chancado TMN=3/4" a No. 4 - H67'    
  --2.-'A.G. zarandeado TMN=3/4" a No. 4 - H67'
  --3.-'A.G. zarandeado B TMN=3/4" a No. 4 - H67' 
-SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H67',1,1,1,0) INTO insert1;
+SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H67',1,1,0,0) INTO insert1;
  --1.-'A.G. chancado TMN=3/8" a No. 16 - H89'   
  --2.-'A.G. zarandeado TMN=3/8" a No. 16 - H89' 
 SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'H89',1,1,0,0) INTO insert1;
@@ -2745,7 +2852,10 @@ SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'AF',1,1,0,0) INTO in
  --1.-'Agragado fino Chancado M'  
  --2.-'Agregado fino zarandeado M' 
 SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'AFM',1,1,0,0) INTO insert1;
-
+ --1.-'AfNat M.Albañ. - AN' 
+SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'AN',1,0,0,0) INTO insert1;
+ --1.-'AfMan M.Albañ. - AM' 
+SELECT insertar_huso_X_planta('Premezclados Cajamarca',1,1,'AM',1,0,0,0) INTO insert1;
 
 
  --1.-'A.G. chancado TMN=1" a 1/2" - H5';
@@ -2775,7 +2885,7 @@ SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H57',1,1,10,0) INTO i
  --1.-'A.G. chancado TMN=3/4" a No. 4 - H67'    
  --2.-'A.G. zarandeado TMN=3/4" a No. 4 - H67'
  --3.-'A.G. zarandeado B TMN=3/4" a No. 4 - H67' 
-SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H67',1,1,1,0) INTO insert1;
+SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H67',1,1,0,0) INTO insert1;
  --1.-'A.G. chancado TMN=3/8" a No. 16 - H89'   
  --2.-'A.G. zarandeado TMN=3/8" a No. 16 - H89' 
 SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'H89',1,1,0,0) INTO insert1;
@@ -2791,7 +2901,10 @@ SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'AF',1,1,0,0) INTO ins
  --1.-'Agragado fino Chancado M'  
  --2.-'Agregado fino zarandeado M' 
 SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'AFM',1,1,0,0) INTO insert1; 
-
+ --1.-'AfNat M.Albañ. - AN' 
+SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'AN',1,0,0,0) INTO insert1;
+ --1.-'AfMan M.Albañ. - AM' 
+SELECT insertar_huso_X_planta('Premezclados Chiclayo',1,1,'AM',1,0,0,0) INTO insert1;
 
 
  --1.-'A.G. chancado TMN=1" a 1/2" - H5';
@@ -2821,7 +2934,7 @@ SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H57',1,1,1,0) INTO in
  --1.-'A.G. chancado TMN=3/4" a No. 4 - H67'    
  --2.-'A.G. zarandeado TMN=3/4" a No. 4 - H67'
  --3.-'A.G. zarandeado B TMN=3/4" a No. 4 - H67' 
-SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H67',1,1,1,0) INTO insert1;
+SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H67',1,1,0,0) INTO insert1;
  --1.-'A.G. chancado TMN=3/8" a No. 16 - H89'   
  --2.-'A.G. zarandeado TMN=3/8" a No. 16 - H89' 
 SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'H89',1,1,0,0) INTO insert1;
@@ -2837,7 +2950,10 @@ SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'AF',1,1,0,0) INTO ins
  --1.-'Agragado fino Chancado M'  
  --2.-'Agregado fino zarandeado M' 
 SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'AFM',1,1,0,0) INTO insert1;
-
+ --1.-'AfNat M.Albañ. - AN' 
+SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'AN',1,0,0,0) INTO insert1;
+ --1.-'AfMan M.Albañ. - AM' 
+SELECT insertar_huso_X_planta('Premezclados Chimbote',1,1,'AM',1,0,0,0) INTO insert1;
 
 
  --1.-'A.G. chancado TMN=1" a 1/2" - H5';
@@ -2867,7 +2983,7 @@ SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H57',1,1,1,0) INTO i
  --1.-'A.G. chancado TMN=3/4" a No. 4 - H67'    
  --2.-'A.G. zarandeado TMN=3/4" a No. 4 - H67'
  --3.-'A.G. zarandeado B TMN=3/4" a No. 4 - H67' 
-SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H67',1,1,1,0) INTO insert1;
+SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H67',1,1,0,0) INTO insert1;
  --1.-'A.G. chancado TMN=3/8" a No. 16 - H89'   
  --2.-'A.G. zarandeado TMN=3/8" a No. 16 - H89' 
 SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'H89',1,1,0,0) INTO insert1;
@@ -2883,7 +2999,10 @@ SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'AF',1,1,0,0) INTO in
  --1.-'Agragado fino Chancado M'  
  --2.-'Agregado fino zarandeado M' 
 SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'AFM',1,1,0,0) INTO insert1;
-
+ --1.-'AfNat M.Albañ. - AN' 
+SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'AN',1,0,0,0) INTO insert1;
+ --1.-'AfMan M.Albañ. - AM' 
+SELECT insertar_huso_X_planta('Premezclados Pacasmayo',1,1,'AM',1,0,0,0) INTO insert1;
 
 
  --1.-'A.G. chancado TMN=1" a 1/2" - H5';
@@ -2905,7 +3024,7 @@ SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H8',1,1,0,0) INTO insert
 SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H9',1,0,1,1) INTO insert1;
  --1.-'A.G. chancado TMN=1" a 3/8" - H56' 
  --2.-'A.G. zarandeado TMN=1" a 3/8" - H56' 
-SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H56',1,1,0,0) INTO insert1;
+SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H56',1,1,1,1) INTO insert1;
  --1.-'A.G. chancado TMN=1" a No. 4 - H57' 
  --2.-'A.G. zarandeado TMN=1" a No. 4 - H57' 
  --3.-'A.G. zarandeado B TMN=1" a No. 4 - H57' 
@@ -2913,7 +3032,7 @@ SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H57',1,1,1,0) INTO inser
  --1.-'A.G. chancado TMN=3/4" a No. 4 - H67'    
  --2.-'A.G. zarandeado TMN=3/4" a No. 4 - H67'
  --3.-'A.G. zarandeado B TMN=3/4" a No. 4 - H67' 
-SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H67',1,1,1,0) INTO insert1;
+SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H67',1,1,0,0) INTO insert1;
  --1.-'A.G. chancado TMN=3/8" a No. 16 - H89'   
  --2.-'A.G. zarandeado TMN=3/8" a No. 16 - H89' 
 SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'H89',1,1,0,0) INTO insert1;
@@ -2929,7 +3048,10 @@ SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'AF',1,1,0,0) INTO insert
  --1.-'Agragado fino Chancado M'  
  --2.-'Agregado fino zarandeado M' 
 SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'AFM',1,1,0,0) INTO insert1; 
-
+ --1.-'AfNat M.Albañ. - AN' 
+SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'AN',1,0,0,0) INTO insert1;
+ --1.-'AfMan M.Albañ. - AM' 
+SELECT insertar_huso_X_planta('Premezclados Piura',1,1,'AM',1,0,0,0) INTO insert1;
 
 
  --1.-'A.G. chancado TMN=1" a 1/2" - H5';
@@ -2959,7 +3081,7 @@ SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H57',1,1,1,0) INTO in
  --1.-'A.G. chancado TMN=3/4" a No. 4 - H67'    
  --2.-'A.G. zarandeado TMN=3/4" a No. 4 - H67'
  --3.-'A.G. zarandeado B TMN=3/4" a No. 4 - H67' 
-SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H67',1,1,1,0) INTO insert1;
+SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H67',1,1,0,0) INTO insert1;
  --1.-'A.G. chancado TMN=3/8" a No. 16 - H89'   
  --2.-'A.G. zarandeado TMN=3/8" a No. 16 - H89' 
 SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'H89',1,1,0,0) INTO insert1;
@@ -2975,6 +3097,10 @@ SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'AF',1,1,0,0) INTO ins
  --1.-'Agragado fino Chancado M'  
  --2.-'Agregado fino zarandeado M' 
 SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'AFM',1,1,0,0) INTO insert1; 				  
+ --1.-'AfNat M.Albañ. - AN' 
+SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'AN',1,0,0,0) INTO insert1;
+ --1.-'AfMan M.Albañ. - AM' 
+SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'AM',1,0,0,0) INTO insert1;
 
   RETURN '1';     
           
@@ -2984,9 +3110,23 @@ SELECT insertar_huso_X_planta('Premezclados Trujillo',1,1,'AFM',1,1,0,0) INTO in
   COST 100;
 ALTER FUNCTION insertartodohusos() OWNER TO postgres;
 
--------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+--------------------------------------------------------------------
+
 
 Select insertartodohusos();
+
+
+
+
+
+
+
+
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
