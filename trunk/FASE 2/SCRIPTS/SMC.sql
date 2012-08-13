@@ -2698,7 +2698,7 @@ idProducto32 numeric:=0;
 		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200,
 		p2min2,p2min112,p2min1,p2min34,p2min12,p2min38,p2minN4,p2minN8,p2minN16,p2minN30,p2minN50,p2minN100,p2minN200,
 		p2max2,p2max112,p2max1,p2max34,p2max12,p2max38,p2maxN4,p2maxN8,p2maxN16,p2maxN30,p2maxN50,p2maxN100,p2maxN200) INTO insert30;
-	   
+	   END IF;
 	    ELSIF $4 ='AN' THEN
 
 		--AfNat M.Albañ. - AN
@@ -2777,7 +2777,7 @@ idProducto32 numeric:=0;
 		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200,
         p1min2,p1min112,p1min1,p1min34,p1min12,p1min38,p1minN4,p1minN8,p1minN16,p1minN30,p1minN50,p1minN100,p1minN200,
 		p1max2,p1max112,p1max1,p1max34,p1max12,p1max38,p1maxN4,p1maxN8,p1maxN16,p1maxN30,p1maxN50,p1maxN100,p1maxN200) INTO insert32;
-		END IF;
+
 
 	   END IF;
 	  END IF;
