@@ -1,0 +1,46 @@
+		matriz.setPlanta("Muestras de Investigación");
+		matriz.setProceso("Análisis Próximo");
+
+		
+		gte.setNombre("Humedad as received");
+		gte.setTipo("QUI");
+		te.setNombre("Humedad as received");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+		
+		gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Volátiles as received");
+		gte.setTipo("QUI");
+		te.setNombre("Volátiles as received");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+		
+		gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Cenizas as received");
+		gte.setTipo("QUI");
+		te.setNombre("Cenizas as received");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+		
+		gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Carbón fijo as received");
+		gte.setTipo("QUI");
+		te.setNombre("Carbón fijo as received");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+		
+		gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Poder calorífico as received");
+		gte.setTipo("QUI");
+		te.setNombre("Poder calorífico as received");
+		te.setUnidadMedida("KPK");
+		arreGte.add(gte);
+		arreTe.add(te);

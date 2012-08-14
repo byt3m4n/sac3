@@ -1,0 +1,186 @@
+----Curva RX
+
+
+---Químico =   QUI
+
+
+matriz.setPlanta("Muestras de Investigación");
+matriz.setProceso("Curva RX");
+
+
+
+
+
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("SiO2");
+		gte.setTipo("QUI");
+		te.setNombre("SiO2");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("SiO2 cuarcítica");
+		gte.setTipo("QUI");
+		te.setNombre("SiO2 cuarcítica");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("SiO2 amorfa");
+		gte.setTipo("QUI");
+		te.setNombre("SiO2 amorfa");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Al2O3");
+		gte.setTipo("QUI");
+		te.setNombre("Al2O3");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Fe2O3");
+		gte.setTipo("QUI");
+		te.setNombre("Fe2O3");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("CaO");
+		gte.setTipo("QUI");
+		te.setNombre("CaO");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("MgO");
+		gte.setTipo("QUI");
+		te.setNombre("MgO");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("K2O");
+		gte.setTipo("QUI");
+		te.setNombre("K2O");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Na2O");
+		gte.setTipo("QUI");
+		te.setNombre("Na2O");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("SO3");
+		gte.setTipo("QUI");
+		te.setNombre("SO3");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Cl");
+		gte.setTipo("QUI");
+		te.setNombre("Cl");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("TiO2");
+		gte.setTipo("QUI");
+		te.setNombre("TiO2");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("F");
+		gte.setTipo("QUI");
+		te.setNombre("F");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("FCaO");
+		gte.setTipo("QUI");
+		te.setNombre("FCaO");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("CaCO3");
+		gte.setTipo("QUI");
+		te.setNombre("CaCO3");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Índice de Actividad Puzolánica – RX");
+		gte.setTipo("QUI");
+		te.setNombre("Índice de Actividad Puzolánica – RX");
+		te.setUnidadMedida("");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Pérdida al fuego");
+		gte.setTipo("QUI");
+		te.setNombre("Pérdida al fuego");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Azufre");
+		gte.setTipo("QUI");
+		te.setNombre("Azufre");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+
+
+
+
+
+
+
+
+
+

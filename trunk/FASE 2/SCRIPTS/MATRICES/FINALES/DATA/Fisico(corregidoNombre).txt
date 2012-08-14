@@ -1,0 +1,260 @@
+----Físico
+
+
+
+
+matriz.setPlanta("Muestras de Investigación");
+matriz.setProceso("Físico");
+
+
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Índice de Hard Grove");
+		gte.setTipo("FIS");
+		te.setNombre("Índice de Hard Grove");
+		te.setUnidadMedida("");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Índice de Bond");
+		gte.setTipo("FIS");
+		te.setNombre("Índice de Bond (kWh/TC)");
+		te.setUnidadMedida("");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Blaine");
+		gte.setTipo("FIS");
+		te.setNombre("Blaine (g/cm2)");
+		te.setUnidadMedida("");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Densidad");
+		gte.setTipo("FIS");
+		te.setNombre("Densidad");
+		te.setUnidadMedida("GCC");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Densidad Aparente");
+		gte.setTipo("FIS");
+		te.setNombre("Densidad Aparente (TM/m3)");
+		te.setUnidadMedida("");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Retenido en malla N° 325");
+		gte.setTipo("FIS");
+		te.setNombre("Retenido en malla N° 325");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Demanda de agua");
+		gte.setTipo("FIS");
+		te.setNombre("Demanda de agua");
+		te.setUnidadMedida("AGU");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Fraguado Inicial");
+		gte.setTipo("FIS");
+		te.setNombre("Fraguado Inicial");
+		te.setUnidadMedida("MIN");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Fraguado Final");
+		gte.setTipo("FIS");
+		te.setNombre("Fraguado Final");
+		te.setUnidadMedida("MIN");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Expansión en Autoclave");
+		gte.setTipo("FIS");
+		te.setNombre("Expansión en Autoclave");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Expansión al Agua");
+		gte.setTipo("FIS");
+		te.setNombre("Expansión al Agua");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Expansión a los sulfatos a 14 días");
+		gte.setTipo("FIS");
+		te.setNombre("Expansión a los sulfatos a 14 días");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Expansión a los sulfatos a 28 días");
+		gte.setTipo("FIS");
+		te.setNombre("Expansión a los sulfatos a 28 días");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Expansión a los sulfatos a 45 días");
+		gte.setTipo("FIS");
+		te.setNombre("Expansión a los sulfatos a 45 días");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Expansión a los sulfatos a 90 días");  
+		gte.setTipo("FIS");
+		te.setNombre("Expansión a los sulfatos a 90 días");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Expansión a los sulfatos a 180 días");  
+		gte.setTipo("FIS");
+		te.setNombre("Expansión a los sulfatos a 180 días");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Resistencia a la compresión a 1 día");  
+		gte.setTipo("FIS");
+		te.setNombre("Resistencia a la compresión a 1 día");
+		te.setUnidadMedida("LPC");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Resistencia a la compresión a 3 días");  
+		gte.setTipo("FIS");
+		te.setNombre("Resistencia a la compresión a 3 días");
+		te.setUnidadMedida("LPC");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Resistencia a la compresión a 7 días");  
+		gte.setTipo("FIS");
+		te.setNombre("Resistencia a la compresión a 7 días");
+		te.setUnidadMedida("LPC");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Resistencia a la compresión a 28 días");  
+		gte.setTipo("FIS");
+		te.setNombre("Resistencia a la compresión a 28 días");
+		te.setUnidadMedida("LPC");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Demanda de agua para patrón");  
+		gte.setTipo("FIS");
+		te.setNombre("Demanda de agua para patrón");
+		te.setUnidadMedida("AGU");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Densidad del Patrón");  
+		gte.setTipo("FIS");
+		te.setNombre("Densidad del Patrón");
+		te.setUnidadMedida("GCC");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Índice de Actividad Puzolánica a 1 día");  
+		gte.setTipo("FIS");
+		te.setNombre("Índice de Actividad Puzolánica a 1 día");
+		te.setUnidadMedida("");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Índice de Actividad Puzolánica a 3 días");  
+		gte.setTipo("FIS");
+		te.setNombre("Índice de Actividad Puzolánica a 3 días");
+		te.setUnidadMedida("");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Índice de Actividad Puzolánica a 7 días");  
+		gte.setTipo("FIS");
+		te.setNombre("Índice de Actividad Puzolánica a 7 días");
+		te.setUnidadMedida("");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Índice de Actividad Puzolánica a 28 días");  
+		gte.setTipo("FIS");
+		te.setNombre("Índice de Actividad Puzolánica a 28 días");
+		te.setUnidadMedida("");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

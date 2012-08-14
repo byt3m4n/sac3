@@ -1,0 +1,87 @@
+update from  "CPSAA"."GESAC_MAE_TIPO_ENSA"
+
+set "SCMTE_NOM_TIPO_ENSA"='SO3',
+
+"SCMTE_COC_UNI_MED"='POR'
+
+
+
+ where     "SCMTE_NOM_TIPO_ENSA" in
+
+
+( SELECT    gr."SCMGT_NOM_GRUP_TIPO_ENSA"    FROM
+"CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA"  gr inner join
+"CPSAA"."GESAC_MAE_MATR_TRAT"  mat
+
+on(gr."SCMMT_IDE_MATR_TRAT_K"=mat."SCMMT_IDE_MATR_TRAT_K")
+   WHERE   mat."SCMMT_NOM_MATR_TRAT" like 'UNIQUANT%'  )   and
+"SCMTE_NOM_TIPO_ENSA" in ('SO3 (%)')
+
+
+
+----GTE
+
+
+
+update    "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA"
+
+set "SCMGT_NOM_GRUP_TIPO_ENSA"='SiO2'
+
+   where  "SCMGT_NOM_GRUP_TIPO_ENSA"  in
+
+
+( SELECT    gr."SCMGT_NOM_GRUP_TIPO_ENSA"    FROM
+"CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA"  gr inner join
+"CPSAA"."GESAC_MAE_MATR_TRAT"  mat
+
+on(gr."SCMMT_IDE_MATR_TRAT_K"=mat."SCMMT_IDE_MATR_TRAT_K")
+   WHERE   mat."SCMMT_NOM_MATR_TRAT" like 'UNIQUANT%'  and
+gr."SCMGT_NOM_GRUP_TIPO_ENSA" like 'SiO2 (%)' )
+
+
+
+
+-------------------------------DELETE
+
+--TIPO DE ENSAYO
+
+delete from  "CPSAA"."GESAC_MAE_TIPO_ENSA"  where     "SCMGT_IDE_GRUP_TIPO_ENSA_K" in
+
+
+( SELECT    gr."SCMGT_IDE_GRUP_TIPO_ENSA_K"    FROM   "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA"  gr inner join  "CPSAA"."GESAC_MAE_MATR_TRAT"  mat
+
+on(gr."SCMMT_IDE_MATR_TRAT_K"=mat."SCMMT_IDE_MATR_TRAT_K")
+   WHERE   mat."SCMMT_NOM_MATR_TRAT" like 'UNIQUANT yeso'  ) 
+
+
+--GRUPO TIPO DE ENSAYO
+
+delete from  "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA"   where  "SCMGT_IDE_GRUP_TIPO_ENSA_K" in
+
+
+( SELECT    gr."SCMGT_IDE_GRUP_TIPO_ENSA_K"    FROM   "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA"  gr inner join  "CPSAA"."GESAC_MAE_MATR_TRAT"  mat
+
+on(gr."SCMMT_IDE_MATR_TRAT_K"=mat."SCMMT_IDE_MATR_TRAT_K")
+   WHERE   mat."SCMMT_NOM_MATR_TRAT"='UNIQUANT puzolana'  and gr."SCMGT_NOM_GRUP_TIPO_ENSA" like 'SiO2' )
+
+
+--MATRIZ
+
+delete from  "CPSAA"."GESAC_MAE_MATR_TRAT"   where  "SCMMT_IDE_MATR_TRAT_K" in
+( SELECT    mat."SCMMT_IDE_MATR_TRAT_K"    FROM   "CPSAA"."GESAC_MAE_MATR_TRAT"  mat 
+   WHERE   mat."SCMMT_NOM_MATR_TRAT"='UNIQUANT puzolana')
+
+
+--PROCESO
+
+delete from "CPSAA"."GESAC_MAE_PROC" where "SCMPC_IDE_PROC_BASE_K" in 
+(SELECT proc."SCMPC_IDE_PROC_K" FROM "CPSAA"."GESAC_MAE_PROC" proc WHERE proc."SCMPC_NOM_PROC" = 'AC-500') and "SCMAP_IDE_PLAN_K" in
+(SELECT plan."SCMAP_IDE_PLAN_K" FROM "CPSAA"."GESAC_MAE_PLAN" plan WHERE plan."SCMAP_NOM_PLAN" = 'Muestras de Investigación')
+
+
+delete from "CPSAA"."GESAC_MAE_PROC" where "SCMPC_IDE_PROC_K" in 
+(SELECT proc."SCMPC_IDE_PROC_K" FROM "CPSAA"."GESAC_MAE_PROC" proc WHERE proc."SCMPC_NOM_PROC" = 'AC-500') 
+
+
+
+
