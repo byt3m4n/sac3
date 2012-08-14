@@ -1,0 +1,328 @@
+matriz.setPlanta("Muestras de Investigación");
+matriz.setProceso("Quantas");
+
+
+		
+		matriz.setProducto("arcilla");
+		arreProd.add(matriz.getProducto());
+		matriz.setProducto("cal");
+		arreProd.add(matriz.getProducto());
+		matriz.setProducto("caliza");
+		arreProd.add(matriz.getProducto());
+		matriz.setProducto("carbón");
+		arreProd.add(matriz.getProducto());
+		matriz.setProducto("cemento");
+		arreProd.add(matriz.getProducto());
+		matriz.setProducto("diatomita");
+		arreProd.add(matriz.getProducto());
+		matriz.setProducto("hierro");
+		arreProd.add(matriz.getProducto());
+		matriz.setProducto("puzolana");
+		arreProd.add(matriz.getProducto());
+		matriz.setProducto("yeso");
+		arreProd.add(matriz.getProducto());
+
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("SiO2");
+		gte.setTipo("QUI");
+		te.setNombre("SiO2");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Al2O3");
+		gte.setTipo("QUI");
+		te.setNombre("Al2O3");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Fe2O3");
+		gte.setTipo("QUI");
+		te.setNombre("Fe2O3");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("CaO");
+		gte.setTipo("QUI");
+		te.setNombre("CaO");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("MgO");
+		gte.setTipo("QUI");
+		te.setNombre("MgO");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("K2O");
+		gte.setTipo("QUI");
+		te.setNombre("K2O");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Na2O");
+		gte.setTipo("QUI");
+		te.setNombre("Na2O");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("SO3");
+		gte.setTipo("QUI");
+		te.setNombre("SO3");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("R2O3");
+		gte.setTipo("QUI");
+		te.setNombre("R2O3");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Cl");
+		gte.setTipo("QUI");
+		te.setNombre("Cl");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("TiO2");
+		gte.setTipo("QUI");
+		te.setNombre("TiO2");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("P2O5");
+		gte.setTipo("QUI");
+		te.setNombre("P2O5");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Rb2O");
+		gte.setTipo("QUI");
+		te.setNombre("Rb2O");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("SrO");
+		gte.setTipo("QUI");
+		te.setNombre("SrO");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("BaO"); 
+		gte.setTipo("QUI");
+		te.setNombre("BaO");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Cr2O3");
+		gte.setTipo("QUI");
+		te.setNombre("Cr2O3");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("F");
+		gte.setTipo("QUI");
+		te.setNombre("F");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("V2O5");
+		gte.setTipo("QUI");
+		te.setNombre("V2O5");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Br");
+		gte.setTipo("QUI");
+		te.setNombre("Br");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("ZrO2");
+		gte.setTipo("QUI");
+		te.setNombre("ZrO2");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Rb2O");
+		gte.setTipo("QUI");
+		te.setNombre("Rb2O");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("MnO");
+		gte.setTipo("QUI");
+		te.setNombre("MnO");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("ZnO");
+		gte.setTipo("QUI");
+		te.setNombre("ZnO");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("NiO");
+		gte.setTipo("QUI");
+		te.setNombre("NiO");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Y2O3");
+		gte.setTipo("QUI");
+		te.setNombre("Y2O3");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("WO3");
+		gte.setTipo("QUI");
+		te.setNombre("WO3");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Nb2O5");
+		gte.setTipo("QUI");
+		te.setNombre("Nb2O5");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("PbO");
+		gte.setTipo("QUI");
+		te.setNombre("PbO");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("MoO3");
+		gte.setTipo("QUI");
+		te.setNombre("MoO3");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("CuO");
+		gte.setTipo("QUI");
+		te.setNombre("CuO");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("Co3O4");
+		gte.setTipo("QUI");
+		te.setNombre("Co3O4");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("As2O3");
+		gte.setTipo("QUI");
+		te.setNombre("As2O3");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);
+
+gte = new Grupo_Tipo_Ensayo();
+		te = new Tipo_Ensayo();
+		gte.setNombre("HgO");
+		gte.setTipo("QUI");
+		te.setNombre("HgO");
+		te.setUnidadMedida("POR");
+		arreGte.add(gte);
+		arreTe.add(te);

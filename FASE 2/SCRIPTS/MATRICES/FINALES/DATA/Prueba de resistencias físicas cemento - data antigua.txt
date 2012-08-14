@@ -1,0 +1,8 @@
+matriz.setPlanta("Muestras de Investigación");
+matriz.setProceso("Prueba de resistencias físicas");
+
+
+		
+		matriz.setProducto("cemento");
+		arreProd.add(matriz.getProducto());
+		

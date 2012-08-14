@@ -1,0 +1,23 @@
+matriz.setPlanta("Muestras de Investigación");
+matriz.setProceso("Pruebas físicas");
+
+
+		matriz.setProducto("arcilla");
+		arreProd.add(matriz.getProducto());
+		matriz.setProducto("cal");
+		arreProd.add(matriz.getProducto());
+		matriz.setProducto("caliza");
+		arreProd.add(matriz.getProducto());
+		matriz.setProducto("carbón");
+		arreProd.add(matriz.getProducto());
+		matriz.setProducto("cemento");
+		arreProd.add(matriz.getProducto());
+		matriz.setProducto("diatomita");
+		arreProd.add(matriz.getProducto());
+		matriz.setProducto("hierro");
+		arreProd.add(matriz.getProducto());
+		matriz.setProducto("puzolana");
+		arreProd.add(matriz.getProducto());
+		matriz.setProducto("yeso");
+		arreProd.add(matriz.getProducto());
+		
