@@ -4,8 +4,8 @@ Principales funciones:
 
 1.Registro de ocurrencias: Pendiente por CPSAA definir criterio de clasificación.
 2.Registro de paradas de equipos.
-3.Cambio de producción: el operador debe indicar en que momento se cambia de equipo, para ello se consulta al SGCP. Pendiente especificar por CPSAA desde qué modulo se hará la consulta.
-4.Cambio de producto: para ello se consulta al SGCP. Pendiente especificar por CPSAA desde qué modulo se hará la consulta.
+3.Cambio de producción: el operador debe indicar en que momento se cambia de equipo, para ello se consulta al SGCP. * Pendiente especificar por CPSAA desde qué modulo se hará la consulta.
+4.Cambio de producto: para ello se consulta al SGCP. * Pendiente especificar por CPSAA desde qué modulo se hará la consulta.
 5.Gestión de avisos: Avisos de paradas de equipos, sean estas programadas, no programadas, externas o de mantenimiento predictivo. Siendo estas 2 últimas no existentes en SAP. El sistema debe ser flexible para el usuario para que se creen nuevos avisos de acuerdo a demanda. Tener en cuenta que los avisos deben replicarse en SAP.
 6.Reportes.
 
@@ -17,7 +17,9 @@ Usuarios quienes utilizarán en el sistema:
 4. Supervisores: Jefes de Sesion que tambien pueden escribir ocurrencias.
  
 Integración con SAP:
--El registro de paradas de equipos en el nuevo sistema debe generar avisos, los mismos que luego son replicados en PM. Aquellos que indiquen el inicio de mantenimiento, servirán como input para la ejecución de ese proceso.
+-El registro de paradas de equipos en el nuevo sistema debe generar avisos, los mismos que luego son replicados en PM. Lo avisos deben tener una clasificación y criterio definido para el envío en determinadas circunstancias. 
+* Pendiente por parte de CPSAA: Definir está clasificación.
+Aquellos que indiquen el inicio de mantenimiento, servirán como input para la ejecución de ese proceso en PM.
 
 Detalles del proceso:
 
@@ -34,6 +36,11 @@ Los equipos tiene flowsheet y código de ubicación, para la solución deben utiliz
 
 En el formulario actual de registro de paradas tiene una opción de búsqueda por flowsheet o por código de ubicación, se debe considerar esta función en el nuevo sistema.
 
+En el excel que manejan tambien existen reportes, los mismos que pueden ser del tipo: Por puesto de trabajo productivo (tipos de fallas, paradas programadas, etc), Reporte trabajo diario de eficiencia, Reporte de puestos de trabajo que fallan más, Reporte por tipos de fallas sucedidas, etc.
+
+La información de las horas productivas de los equipos, para generar los reportes, se obtiene del sistema de producción (SGCP) de donde se toma las horas de parada registradas por el ECS, en este último sistema tambien se indican aquellas horas donde no hubo alimentación por parte del equipo, por lo que tambien se considera parada. 
+
+
 Clasificación de paradas de equipos:
 
 -Paradas externas: Generan avisos de un tipo de operación (actualmente no se tiene definido esto en SAP).
@@ -41,8 +48,6 @@ Clasificación de paradas de equipos:
 -Paradas no programadas: Generan avisos de falla que pueden originar un mantenimiento como no (operativo). Estas fallas pueden ser del tipo: electrica (mantenimiento), mecánica (mantenimiento), instrumental (mantenimiento), operativa, etc. Pendiente confirmar por parte de CPSAA: tipos de fallas que puedan generar mantenimiento y cuales no.
 
 Cuando el aviso genera un mantenimiento en PM, este es cerrado por personal de mantenimiento, sin embargo, en la implementación del sistema, el tablerista será quien coloque la hora fin cuando vea en funcionamiento el equipo.
-
-El sistema de producción (SGCP) toma las horas de parada registradas en el ECS, en este último sistema se indican aquellas horas donde no hubo alimentación por parte del equipo, por lo que tambien se considera parada. Esta información permite determinar las horas productivas de los equipos y con ella se puede generar el reporte de eficiencia.
 
 Ejemplos de avisos:
 
@@ -66,17 +71,11 @@ Por ejemplo: seguir la estructura y jerarquía de planta, tablero y equipos. La i
 
 -Se debe hacer una precarga de la data de PM a la base de datos del nuevo sistema. Pendiente entre CPSAA y CSTI: coordinación de arquitectura con Miguel Ortiz.
 
--Integración con PM: al momento de registrar paradas de equipos se debe enviar avisos, de acuerdo a una clasificación y criterio definido de envío de tipos de avisos. Pendiente por parte de CPSAA: Definir está clasificación.
-
 -Los avisos deben enviarse por correo electrónico y mensajes de texto.
-
--Los avisos de mantenimiento son el input del flujo de generación de orden de compra en PM.
 
 -Considerar flexibilidad de la plataforma para que a futuro se implemente un tipo de aviso predictivo.
 
 -Algunos campos de texto importantes a considerar en el formulario de registro: El taller y prioridad seleccionable por el tablerista.
-
--Reportes existentes: Por puesto de trabajo productivo (tipos de fallas, paradas programadas, etc), Reporte trabajo diario de eficiencia, Reporte de puestos de trabajo que fallan más, Reporte por tipos de fallas sucedidas, etc.
 
 -Tipos de Reportes: tipos de reporte: pareto, tendencia, pie, barras, texto resumen.
 
@@ -84,8 +83,5 @@ Por ejemplo: seguir la estructura y jerarquía de planta, tablero y equipos. La i
  
 Compromiso por parte de CPSAA: 
 -Sintetizar bitacora de ocurrencia. Se debe considerar cierre de turno con las actividades hechas. 
--Excel con reportes y formulario de registro de paradas.
+-Enviar Excel con reportes y formulario de registro de paradas.
  
-REQUERIMIENTOS DE ANALISIS
- 
--Definición de procesos, clasificación de avisos y requerimientos.
