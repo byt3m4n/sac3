@@ -9,7 +9,7 @@ Principales funciones:
 5.Gestión de avisos: Avisos de paradas de equipos, sean estas programadas, no programadas, externas o de mantenimiento predictivo. Siendo estas 2 últimas no existentes en SAP. El sistema debe ser flexible para el usuario para que se creen nuevos avisos de acuerdo a demanda. Tener en cuenta que los avisos deben replicarse en SAP.
 6.Reportes: Generados por la información de las paradas, así como del sistema SGCP.
 
-Usuarios quienes utilizarán en el sistema:
+Usuarios quienes utilizarán el sistema:
  
 1. tableristas: controlan la planta con el ECS y son responsables de escribir las ocurrencias de los equipos, entre otras actividades realizadas.
 2. Gerencia de Planta: Visualizan reportes de productividad y eficiencia de equipos, entre otros.
