@@ -1,0 +1,64 @@
+Proyecto: Bitacora de operaciones
+ 
+Bitacora de operaciones (webmovil plataforma independiente)
+-registro de ocurrencias
+-registro de paradas
+-gestión de avisos (avisos de paradas sean estas programadas, no programadas, externas o de mantenimiento predictivo. Siendo estas 2 últimas no existentes en SAP)
+- Reportes 
+ 
+Integración con SAP:
+Se requiera integrar con PM los avisos generados por la gestión de paradas registrada desde la nueva plataforma solicitada. 
+ 
+Detalle técnico:
+Se necesita que la plataforma pueda ser vista desde tablets, y que pueda ser visto desde varios browsers. CPSAA debe especificar versión mínima.
+ 
+Estructura organizativa: 
+División, sociedad, centro y tablero. Cada tablero maneja un grupo de maquinas
+ 
+- Usuarios quienes utilizarán en la plataforma: 
+ 
+1. tableristas (controlan la planta con el ECS y su principsl función es escribir ocurrencias)
+2. Gerencia de Planta
+3. Superintendencia (operación, producción, calidad y mantenimiento)
+4. Supervisores (jefes de sesion, tambien pueden escribir ocurrencias)
+ 
+-PRINCIPALES FUNCIONES
+ 
+1. Registro de ocurrencias (Pendiente: definir criterio de clasificación)
+2. Registro de Paradas
+3. Cambio de producción (el operador debe indicar en que momento se cambia de equipo, para ello se consulta al SGCP) 
+4. Cambio de producto (para ello se consulta al SGCP)
+5. Registrar tipos de avisos (Dar flexibilidad al usuario para que se creen nuevos avisos de acuerdo a demanda. Tener en cuenta que los nuevos avisos deben replicarse en SAP)
+ 
+La gestión de las alertas automáticas está enfocada en los puntos 1 y 2 
+ 
+DETALLES TÉCNICOS A CONSIDERAR
+ 
+- El Modelo logico de la base de datos de la plataforma debe tener similar estructura a la existente en PM (SAP), solo que optimizada y obviando varios niveles. 
+Por ejemplo: seguir la estructura y jerarquía de planta, tablero y equipos. La información de los equipos se debe manejar por flowsheet y código de ubicación. 
+-Se debe hacer una precarga de la data de PM a la base de datos de la nueva plataforma.
+-Pendiente: coordinación de arquitectura con Miguel Ortiz.
+-Integración con PM: al momento de registrar ocurrencias y paradas se debe enviar avisos de paradas, de acuerdo a una clasificación y criterio definido de envío de tipos de alerta.
+Ejemplos de avisos:
+-solicitud de trabajo
+-aviso de averias **
+-aviso de actividad
+Clasificar concepto de aviso. Porque algunas veces pueden ser avisos sin necesidad de que pare la maquina. 
+-aviso de paradas de operación
+-aviso de paradas de mantenimiento
+-aviso de mantenimiento predictivo
+-Pendiente: definición de tipos de ocurrencia, tipos de fallas relacionados con paradas, clasificación de avisos y relación entre avisos, paradas y ocurrencias (reglas de negocio).
+-Los avisos deben enviarse por correo y mensajes de texto
+-los avisos de mantenimiento son el input del flujo de generación de orden de compra en PM
+-Considerar flexibilidad de la plataforma para que a futuro se implemente un tipo de aviso predictivo
+-Algunos campos de texto importantes a considerar en el formulario de registro: El taller y prioridad seleccionable por el tablerista
+-Reportes graficos: tipos de reporte: pareto, tendencia, pie, barras, texto resumen
+-PM: construir avisos, por lo demas se mantiene.
+ 
+Compromiso por parte de CPSAA: 
+-Sintetizar bitacora de ocurrencia. Se debe considerar cierre de turno con las actividades hechas. 
+-Excel con reportes y formulario de registro de paradas.
+ 
+REQUERIMIENTOS DE ANALISIS
+ 
+-Definición de procesos, clasificación de avisos y requerimientos.
