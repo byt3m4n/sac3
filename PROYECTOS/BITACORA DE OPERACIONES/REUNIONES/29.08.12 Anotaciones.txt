@@ -1,59 +1,86 @@
-Proyecto: Bitacora de operaciones
+Proyecto: Bitacora de operaciones (webmovil plataforma independiente)
+
+Principales funciones:
+
+1.Registro de ocurrencias: Pendiente por CPSAA definir criterio de clasificación.
+2.Registro de paradas de equipos.
+3.Cambio de producción: el operador debe indicar en que momento se cambia de equipo, para ello se consulta al SGCP. Pendiente especificar por CPSAA desde qué modulo se hará la consulta.
+4.Cambio de producto: para ello se consulta al SGCP. Pendiente especificar por CPSAA desde qué modulo se hará la consulta.
+5.Gestión de avisos: Avisos de paradas de equipos, sean estas programadas, no programadas, externas o de mantenimiento predictivo. Siendo estas 2 últimas no existentes en SAP. El sistema debe ser flexible para el usuario para que se creen nuevos avisos de acuerdo a demanda. Tener en cuenta que los avisos deben replicarse en SAP.
+6.Reportes.
+
+Usuarios quienes utilizarán en el sistema:
  
-Bitacora de operaciones (webmovil plataforma independiente)
--registro de ocurrencias
--registro de paradas
--gestión de avisos (avisos de paradas sean estas programadas, no programadas, externas o de mantenimiento predictivo. Siendo estas 2 últimas no existentes en SAP)
-- Reportes 
+1. tableristas: controlan la planta con el ECS y son responsables de escribir las ocurrencias de los equipos, entre otras actividades realizadas.
+2. Gerencia de Planta: Visualizan reportes de productividad y eficiencia de equipos, entre otros.
+3. Superintendencia, involucra operación, producción, calidad y mantenimiento: Visualizan reportes de productividad y eficiencia de equipos, entre otros.
+4. Supervisores: Jefes de Sesion que tambien pueden escribir ocurrencias.
  
 Integración con SAP:
-Se requiera integrar con PM los avisos generados por la gestión de paradas registrada desde la nueva plataforma solicitada. 
- 
-Detalle técnico:
-Se necesita que la plataforma pueda ser vista desde tablets, y que pueda ser visto desde varios browsers. CPSAA debe especificar versión mínima.
- 
-Estructura organizativa: 
-División, sociedad, centro y tablero. Cada tablero maneja un grupo de maquinas
- 
-- Usuarios quienes utilizarán en la plataforma: 
- 
-1. tableristas (controlan la planta con el ECS y su principsl función es escribir ocurrencias)
-2. Gerencia de Planta
-3. Superintendencia (operación, producción, calidad y mantenimiento)
-4. Supervisores (jefes de sesion, tambien pueden escribir ocurrencias)
- 
--PRINCIPALES FUNCIONES
- 
-1. Registro de ocurrencias (Pendiente: definir criterio de clasificación)
-2. Registro de Paradas
-3. Cambio de producción (el operador debe indicar en que momento se cambia de equipo, para ello se consulta al SGCP) 
-4. Cambio de producto (para ello se consulta al SGCP)
-5. Registrar tipos de avisos (Dar flexibilidad al usuario para que se creen nuevos avisos de acuerdo a demanda. Tener en cuenta que los nuevos avisos deben replicarse en SAP)
- 
-La gestión de las alertas automáticas está enfocada en los puntos 1 y 2 
- 
-DETALLES TÉCNICOS A CONSIDERAR
- 
-- El Modelo logico de la base de datos de la plataforma debe tener similar estructura a la existente en PM (SAP), solo que optimizada y obviando varios niveles. 
-Por ejemplo: seguir la estructura y jerarquía de planta, tablero y equipos. La información de los equipos se debe manejar por flowsheet y código de ubicación. 
--Se debe hacer una precarga de la data de PM a la base de datos de la nueva plataforma.
--Pendiente: coordinación de arquitectura con Miguel Ortiz.
--Integración con PM: al momento de registrar ocurrencias y paradas se debe enviar avisos de paradas, de acuerdo a una clasificación y criterio definido de envío de tipos de alerta.
+-El registro de paradas de equipos en el nuevo sistema debe generar avisos, los mismos que luego son replicados en PM. Aquellos que indiquen el inicio de mantenimiento, servirán como input para la ejecución de ese proceso.
+
+Detalles del proceso:
+
+-La estructura organizativa está compuesta por: División, sociedad, centro y tablero. Cada tablero maneja un grupo de maquinas. Esta estructura se indica en PM.
+
+Actualmente manejan un excel en donde se registran las paradas por puesto de trabajo.
+El puesto de trabajo puede ser un equipo (desde el punto de vista de producción) o una persona, para este caso es el primero. 
+Al momento de registrar la parada, se determina el día, se elige el equipo principal (Molinos, Hornos, Maquinas de embolsar, etc), y si este tiene otras especificaciones técnicas se despliega una lista para detallarlo, luego se indica el equipo de la falla, en este punto es cuando se muestra el el catalogo de fallas asociadas al equipo. El catalogo de fallas es tomado de SAP (no se está considerando un nivel). Finalmente se indica la hora de inicio y fin de paro del equipo. 
+
+Existen equipos que tienen fallas recurrentes en el día por lo que en el registro actual hay campos que permiten registrar varias paradas por la misma falla, con campos repetidos de horas de inicio y fin, esto permite generar varios avisos en un sólo registro.
+
+Las fallas indicadas en el detalle son clasificadas según el criterio de análisis del área de mantenimiento y producción. 
+Los equipos tiene flowsheet y código de ubicación, para la solución deben utilizarse ambos.
+
+En el formulario actual de registro de paradas tiene una opción de búsqueda por flowsheet o por código de ubicación, se debe considerar esta función en el nuevo sistema.
+
+Clasificación de paradas de equipos:
+
+-Paradas externas: Generan avisos de un tipo de operación (actualmente no se tiene definido esto en SAP).
+-Paradas programadas: Generan avisos de operación.
+-Paradas no programadas: Generan avisos de falla que pueden originar un mantenimiento como no (operativo). Estas fallas pueden ser del tipo: electrica (mantenimiento), mecánica (mantenimiento), instrumental (mantenimiento), operativa, etc. Pendiente confirmar por parte de CPSAA: tipos de fallas que puedan generar mantenimiento y cuales no.
+
+Cuando el aviso genera un mantenimiento en PM, este es cerrado por personal de mantenimiento, sin embargo, en la implementación del sistema, el tablerista será quien coloque la hora fin cuando vea en funcionamiento el equipo.
+
+El sistema de producción (SGCP) toma las horas de parada registradas en el ECS, en este último sistema se indican aquellas horas donde no hubo alimentación por parte del equipo, por lo que tambien se considera parada. Esta información permite determinar las horas productivas de los equipos y con ella se puede generar el reporte de eficiencia.
+
 Ejemplos de avisos:
--solicitud de trabajo
--aviso de averias **
--aviso de actividad
-Clasificar concepto de aviso. Porque algunas veces pueden ser avisos sin necesidad de que pare la maquina. 
--aviso de paradas de operación
--aviso de paradas de mantenimiento
--aviso de mantenimiento predictivo
--Pendiente: definición de tipos de ocurrencia, tipos de fallas relacionados con paradas, clasificación de avisos y relación entre avisos, paradas y ocurrencias (reglas de negocio).
--Los avisos deben enviarse por correo y mensajes de texto
--los avisos de mantenimiento son el input del flujo de generación de orden de compra en PM
--Considerar flexibilidad de la plataforma para que a futuro se implemente un tipo de aviso predictivo
--Algunos campos de texto importantes a considerar en el formulario de registro: El taller y prioridad seleccionable por el tablerista
--Reportes graficos: tipos de reporte: pareto, tendencia, pie, barras, texto resumen
--PM: construir avisos, por lo demas se mantiene.
+
+-Solicitud de trabajo.
+-Aviso de averias.
+-Aviso de actividad.
+-Aviso de paradas de operación.
+-Aviso de paradas de mantenimiento.
+-Aviso de mantenimiento predictivo (No está definido en PM).
+
+Considerar que pueden existir avisos sin necesidad de que pare el equipo.
+
+* Pendiente por parte de CPSAA: definición de tipos de ocurrencia, paradas relacionadas con tipos de fallas, clasificación de avisos y relación de estos con paradas y ocurrencias (reglas de negocio).
+
+Detalle técnico:
+
+-Se requiere que el nuevo sistema pueda ser visto desde tablets, y desde varios browsers. CPSAA debe especificar versión mínima de browser.
+
+-El Modelo logico de la base de datos de la plataforma debe tener similar estructura a la existente en PM (SAP), solo que optimizada y obviando varios niveles. 
+Por ejemplo: seguir la estructura y jerarquía de planta, tablero y equipos. La información de los equipos se debe manejar por flowsheet y código de ubicación. 
+
+-Se debe hacer una precarga de la data de PM a la base de datos del nuevo sistema. Pendiente entre CPSAA y CSTI: coordinación de arquitectura con Miguel Ortiz.
+
+-Integración con PM: al momento de registrar paradas de equipos se debe enviar avisos, de acuerdo a una clasificación y criterio definido de envío de tipos de avisos. Pendiente por parte de CPSAA: Definir está clasificación.
+
+-Los avisos deben enviarse por correo electrónico y mensajes de texto.
+
+-Los avisos de mantenimiento son el input del flujo de generación de orden de compra en PM.
+
+-Considerar flexibilidad de la plataforma para que a futuro se implemente un tipo de aviso predictivo.
+
+-Algunos campos de texto importantes a considerar en el formulario de registro: El taller y prioridad seleccionable por el tablerista.
+
+-Reportes existentes: Por puesto de trabajo productivo (tipos de fallas, paradas programadas, etc), Reporte trabajo diario de eficiencia, Reporte de puestos de trabajo que fallan más, Reporte por tipos de fallas sucedidas, etc.
+
+-Tipos de Reportes: tipos de reporte: pareto, tendencia, pie, barras, texto resumen.
+
+-PM: construir avisos, por lo demas se mantiene la configuración actual.
  
 Compromiso por parte de CPSAA: 
 -Sintetizar bitacora de ocurrencia. Se debe considerar cierre de turno con las actividades hechas. 
