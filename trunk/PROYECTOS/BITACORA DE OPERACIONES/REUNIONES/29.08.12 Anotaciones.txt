@@ -7,7 +7,7 @@ Principales funciones:
 3.Cambio de producción: el operador debe indicar en que momento se cambia de equipo, para ello se consulta al SGCP. * Pendiente especificar por CPSAA desde qué modulo se hará la consulta.
 4.Cambio de producto: para ello se consulta al SGCP. * Pendiente especificar por CPSAA desde qué modulo se hará la consulta.
 5.Gestión de avisos: Avisos de paradas de equipos, sean estas programadas, no programadas, externas o de mantenimiento predictivo. Siendo estas 2 últimas no existentes en SAP. El sistema debe ser flexible para el usuario para que se creen nuevos avisos de acuerdo a demanda. Tener en cuenta que los avisos deben replicarse en SAP.
-6.Reportes.
+6.Reportes: Generados por la información de las paradas, así como del sistema SGCP.
 
 Usuarios quienes utilizarán en el sistema:
  
