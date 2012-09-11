@@ -1609,19 +1609,17 @@ idProducto32 numeric:=0;
  BEGIN     
 
 
-      SELECT   "SCMPC_IDE_PROC_K" FROM "CPSAA"."GESAC_MAE_PLAN" MP
-                                  INNER JOIN "CPSAA"."GESAC_MAE_PROC" MPR
-				  ON MPR."SCMAP_IDE_PLAN_K" = MP."SCMAP_IDE_PLAN_K"
-				  WHERE "SCMAP_NOM_PLAN"=$1
-				  AND "SCMPC_NOM_NEGO"='Premezclados' 
-				  ORDER BY "SCMPC_IDE_PROC_K" ASC LIMIT 1 INTO idProceso1;
 
-      SELECT   "SCMPC_IDE_PROC_K" FROM "CPSAA"."GESAC_MAE_PLAN" MP
-                                  INNER JOIN "CPSAA"."GESAC_MAE_PROC" MPR
-				  ON MPR."SCMAP_IDE_PLAN_K" = MP."SCMAP_IDE_PLAN_K"
-				  WHERE "SCMAP_NOM_PLAN"=$1
-				  AND "SCMPC_NOM_NEGO"='Premezclados' 
-				  ORDER BY "SCMPC_IDE_PROC_K" DESC LIMIT 1 INTO idProceso2;
+		SELECT MPR2."SCMPC_IDE_PROC_K" FROM "CPSAA"."GESAC_MAE_PROC" MPR2  INNER JOIN "CPSAA"."GESAC_MAE_PROC" MPR
+  ON MPR."SCMPC_IDE_PROC_K"=MPR2."SCMPC_IDE_PROC_BASE_K" 
+       INNER JOIN "CPSAA"."GESAC_MAE_PLAN" MP	
+     ON MPR2."SCMAP_IDE_PLAN_K" = MP."SCMAP_IDE_PLAN_K"
+  WHERE "SCMAP_NOM_PLAN"=$1     AND MPR."SCMPC_NOM_PROC"='Recepción y almacenaje de M.Ps.' INTO idProceso1;
+
+		SELECT MPR2."SCMPC_IDE_PROC_K" FROM "CPSAA"."GESAC_MAE_PROC" MPR2 INNER JOIN "CPSAA"."GESAC_MAE_PROC" MPR
+    ON MPR."SCMPC_IDE_PROC_K"=MPR2."SCMPC_IDE_PROC_BASE_K" 
+     INNER JOIN "CPSAA"."GESAC_MAE_PLAN" MP	
+       ON MPR2."SCMAP_IDE_PLAN_K" = MP."SCMAP_IDE_PLAN_K"       WHERE "SCMAP_NOM_PLAN"=$1 AND MPR."SCMPC_NOM_PROC"='Zarandeo y chancado de agregados' INTO idProceso2;
 
 				  
 
@@ -3180,92 +3178,53 @@ Select insertartodohusos();
 
 -- DROP FUNCTION insertar_max_min(numeric, numeric, numeric, numeric, character);
 
-CREATE OR REPLACE FUNCTION insertar_max_min(numeric, numeric, numeric, numeric, character)
-  RETURNS character varying AS
-$BODY$
-DECLARE        
+--CREATE OR REPLACE FUNCTION insertar_max_min(numeric, numeric, numeric, numeric, character)
+ -- RETURNS character varying AS
+--$BODY$
+--DECLARE        
 
-       idTipoEnsa numeric:=0;
- BEGIN     
-
-
-
-	SELECT "SCMTE_IDE_TIPO_ENSA_K" FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" TE  
-	  LEFT JOIN "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" GE   ON TE."SCMGT_IDE_GRUP_TIPO_ENSA_K"=GE."SCMGT_IDE_GRUP_TIPO_ENSA_K"
-	  LEFT JOIN "CPSAA"."GESAC_MAE_MATR_TRAT" MT ON MT."SCMMT_IDE_MATR_TRAT_K"=GE."SCMMT_IDE_MATR_TRAT_K"  
-	  WHERE "SCMPR_IDE_PROD_K"=$1 AND "SCMPC_IDE_PROC_K"=$2
-	  AND "SCMTE_NOM_TIPO_ENSA" = $5 INTO idTipoEnsa;
+      -- idTipoEnsa numeric:=0;
+-- BEGIN     
 
 
 
-	UPDATE "CPSAA"."GESAC_MOV_CONT" 
-	SET "SCMOC_VLR_CONT_SUP_PRO"=$3,
-	    "SCMOC_VLR_CONT_INF_PRO"=$4
-	WHERE "SCMTE_IDE_TIPO_ENSA_K"=idTipoEnsa;
+--	SELECT "SCMTE_IDE_TIPO_ENSA_K" FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" TE  
+--	  LEFT JOIN "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" GE   ON TE."SCMGT_IDE_GRUP_TIPO_ENSA_K"=GE."SCMGT_IDE_GRUP_TIPO_ENSA_K"
+--	  LEFT JOIN "CPSAA"."GESAC_MAE_MATR_TRAT" MT ON MT."SCMMT_IDE_MATR_TRAT_K"=GE."SCMMT_IDE_MATR_TRAT_K"  
+--	  WHERE "SCMPR_IDE_PROD_K"=$1 AND "SCMPC_IDE_PROC_K"=$2
+--	  AND "SCMTE_NOM_TIPO_ENSA" = $5 INTO idTipoEnsa;
+
+
+
+--	UPDATE "CPSAA"."GESAC_MOV_CONT" 
+--	SET "SCMOC_VLR_CONT_SUP_PRO"=$3,
+--	    "SCMOC_VLR_CONT_INF_PRO"=$4
+--	WHERE "SCMTE_IDE_TIPO_ENSA_K"=idTipoEnsa;
 
 							  
 
-  RETURN 'GAME OVER';     
+ -- RETURN 'GAME OVER';     
            
- END;
- $BODY$
-  LANGUAGE plpgsql VOLATILE
-  COST 100;
-ALTER FUNCTION insertar_max_min(numeric, numeric, numeric, numeric, character) OWNER TO postgres;
+-- END;
+ --$BODY$
+ -- LANGUAGE plpgsql VOLATILE
+ -- COST 100;
+--ALTER FUNCTION insertar_max_min(numeric, numeric, numeric, numeric, character) OWNER TO postgres;
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
--- Function: insertar_max_min(numeric, numeric, numeric, numeric, character)
-
--- DROP FUNCTION insertar_max_min(numeric, numeric, numeric, numeric, character);
-
-CREATE OR REPLACE FUNCTION insertar_max_min(numeric, numeric, numeric, numeric, character)
-  RETURNS character varying AS
-$BODY$
-DECLARE        
-
-       idTipoEnsa numeric:=0;
- BEGIN     
-
-
-
-	SELECT "SCMTE_IDE_TIPO_ENSA_K" FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" TE  
-	  LEFT JOIN "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" GE   ON TE."SCMGT_IDE_GRUP_TIPO_ENSA_K"=GE."SCMGT_IDE_GRUP_TIPO_ENSA_K"
-	  LEFT JOIN "CPSAA"."GESAC_MAE_MATR_TRAT" MT ON MT."SCMMT_IDE_MATR_TRAT_K"=GE."SCMMT_IDE_MATR_TRAT_K"  
-	  WHERE "SCMPR_IDE_PROD_K"=$1 AND "SCMPC_IDE_PROC_K"=$2
-	  AND "SCMTE_NOM_TIPO_ENSA" = $5 INTO idTipoEnsa;
-
-
-
-	UPDATE "CPSAA"."GESAC_MOV_CONT" 
-	SET "SCMOC_VLR_CONT_SUP_PRO"=$3,
-	    "SCMOC_VLR_CONT_INF_PRO"=$4
-	WHERE "SCMTE_IDE_TIPO_ENSA_K"=idTipoEnsa;
-
-							  
-
-  RETURN 'GAME OVER';     
-           
- END;
- $BODY$
-  LANGUAGE plpgsql VOLATILE
-  COST 100;
-ALTER FUNCTION insertar_max_min(numeric, numeric, numeric, numeric, character) OWNER TO postgres;
-
-----------------------------------------------------------------------------------------------------------------------------------
-
 -----FUNCTION insertar_max_min(id_prod, id_proce, maximo, minimo, nombre_tipo_ensayo);
-select insertar_max_min(561, 50, 100, 100, '2"');
-select insertar_max_min(561, 50, 100, 100, '1 1/2"');
-select insertar_max_min(561, 50, 100, 100, '1"');
-select insertar_max_min(561, 50, 100, 100, '3/4"');
-select insertar_max_min(561, 50, 100, 100, '1/2"');
-select insertar_max_min(561, 50, 100, 100, '3/8"');
-select insertar_max_min(561, 50, 100, 95, 'N°4');
-select insertar_max_min(561, 50, 100, 80, 'N°8');
-select insertar_max_min(561, 50, 85, 50, 'N°16');
-select insertar_max_min(561, 50, 60, 25, 'N°30');
-select insertar_max_min(561, 50, 30, 5, 'N°50');
-select insertar_max_min(561, 50, 10, 0, 'N°100');
-select insertar_max_min(561, 50, 5, 0, 'N°200');
-select insertar_max_min(561, 50, 0, 0, 'Fondo');
+--select insertar_max_min(561, 50, 100, 100, '2"');
+--select insertar_max_min(561, 50, 100, 100, '1 1/2"');
+--select insertar_max_min(561, 50, 100, 100, '1"');
+--select insertar_max_min(561, 50, 100, 100, '3/4"');
+--select insertar_max_min(561, 50, 100, 100, '1/2"');
+--select insertar_max_min(561, 50, 100, 100, '3/8"');
+--select insertar_max_min(561, 50, 100, 95, 'N°4');
+--select insertar_max_min(561, 50, 100, 80, 'N°8');
+--select insertar_max_min(561, 50, 85, 50, 'N°16');
+--select insertar_max_min(561, 50, 60, 25, 'N°30');
+--select insertar_max_min(561, 50, 30, 5, 'N°50');
+--select insertar_max_min(561, 50, 10, 0, 'N°100');
+--select insertar_max_min(561, 50, 5, 0, 'N°200');
+--select insertar_max_min(561, 50, 0, 0, 'Fondo');
