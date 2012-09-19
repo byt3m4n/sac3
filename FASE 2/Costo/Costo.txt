@@ -1,1 +1,28 @@
+Para obtener el costo de un proyecto:
+------------------------------------
+
+1)      Costo hora analista programador 50 soles
+
+2)      Costo hora Jefe de Proyecto 62 soles
+
+
+TarifaxHora * HorasDeTrabajo * Dias * Participación
+
+----------------------------------------------------
+
+por ejemplo si un AP1 invertira 45 días y otro AP2 invertira 50 días el calculo sería
+y si un jp estará involucrado al 50% por 60 días.
+
+para el AP1: 50*8*45
+
+para el AP2: 50*8*50
+
+para el JP: 62*8*60*50%
+
+La suma de los 3 montos es el costo del proyecto que deberá incluirse en la propuesta
+
+--------------------------------
+
 2500 dólares / 22 días / 8 horas
+
+
