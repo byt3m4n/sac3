@@ -160,382 +160,6 @@ ALTER FUNCTION registro_sac_sap(numeric, numeric, numeric) OWNER TO postgres;
 
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
--- Function: nombretipoensayoesresistenciacompresion7dias(character varying)
-
--- DROP FUNCTION nombretipoensayoesresistenciacompresion7dias(character varying);
-
-CREATE OR REPLACE FUNCTION nombretipoensayoesresistenciacompresion7dias(character varying)
-  RETURNS integer AS
-$BODY$
-
-/**********************************************
-FECHA		: 21-03-2012
-DESCRIPCION	: VALIDA SI EL NOMBRE TIPO ENSAYO QUE SE PASA COMO PARAMETRO CONTIENE LAS PALABRAS: RESISTENCIA, COMPRESIÓN o COMPRESION Y 28
-DEVUELVE	: 1 = SI CUMPLE 
-		  2 = NO CUMPLE		  
-AUTOR		: DVQ
-**********************************************/
-
-DECLARE
-	resultado integer := 0;
-	posicion integer := 0;
-	nombreTipoEnsayo character varying(100);
-    BEGIN
-	nombreTipoEnsayo := $1;
-	
-	select position('RESISTENCIA' in upper(nombreTipoEnsayo)) into posicion;	
-	IF(posicion > 0) THEN		
-		select position('COMPRESIÓN' in upper(nombreTipoEnsayo)) into posicion;
-		IF(posicion > 0) THEN 
-			select position('7' in upper(nombreTipoEnsayo)) into posicion;
-			IF(posicion > 0) THEN
-				resultado := 1;
-			ELSE
-				resultado := 0;
-			END IF;
-		ELSE
-			select position('COMPRESION' in upper(nombreTipoEnsayo)) into posicion;	
-			IF(posicion > 0) THEN 
-				select position('7' in upper(nombreTipoEnsayo)) into posicion;
-				IF(posicion > 0) THEN
-					resultado := 1;
-				ELSE
-					resultado := 0;
-				END IF;
-			ELSE
-				resultado := 0;
-			END IF;	
-		END IF;
-		
-	ELSE
-		resultado := 0;
-	END IF;
-	
-	return resultado;
-    END;
-$BODY$
-  LANGUAGE plpgsql VOLATILE
-  COST 100;
-ALTER FUNCTION nombretipoensayoesresistenciacompresion7dias(character varying) OWNER TO postgres;
-
---------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
--- Function: nombretipoensayoesresistenciacompresion14dias(character varying)
-
--- DROP FUNCTION nombretipoensayoesresistenciacompresion14dias(character varying);
-
-CREATE OR REPLACE FUNCTION nombretipoensayoesresistenciacompresion14dias(character varying)
-  RETURNS integer AS
-$BODY$
-
-/**********************************************
-FECHA		: 21-03-2012
-DESCRIPCION	: VALIDA SI EL NOMBRE TIPO ENSAYO QUE SE PASA COMO PARAMETRO CONTIENE LAS PALABRAS: RESISTENCIA, COMPRESIÓN o COMPRESION Y 28
-DEVUELVE	: 1 = SI CUMPLE 
-		  2 = NO CUMPLE		  
-AUTOR		: DVQ
-**********************************************/
-
-DECLARE
-	resultado integer := 0;
-	posicion integer := 0;
-	nombreTipoEnsayo character varying(100);
-    BEGIN
-	nombreTipoEnsayo := $1;
-	
-	select position('RESISTENCIA' in upper(nombreTipoEnsayo)) into posicion;	
-	IF(posicion > 0) THEN		
-		select position('COMPRESIÓN' in upper(nombreTipoEnsayo)) into posicion;
-		IF(posicion > 0) THEN 
-			select position('14' in upper(nombreTipoEnsayo)) into posicion;
-			IF(posicion > 0) THEN
-				resultado := 1;
-			ELSE
-				resultado := 0;
-			END IF;
-		ELSE
-			select position('COMPRESION' in upper(nombreTipoEnsayo)) into posicion;	
-			IF(posicion > 0) THEN 
-				select position('14' in upper(nombreTipoEnsayo)) into posicion;
-				IF(posicion > 0) THEN
-					resultado := 1;
-				ELSE
-					resultado := 0;
-				END IF;
-			ELSE
-				resultado := 0;
-			END IF;	
-		END IF;
-		
-	ELSE
-		resultado := 0;
-	END IF;
-	
-	return resultado;
-    END;
-$BODY$
-  LANGUAGE plpgsql VOLATILE
-  COST 100;
-ALTER FUNCTION nombretipoensayoesresistenciacompresion14dias(character varying) OWNER TO postgres;
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
--- Function: existeresistenciacompresion7dias(numeric)
-
--- DROP FUNCTION existeresistenciacompresion7dias(numeric);
-
-CREATE OR REPLACE FUNCTION existeresistenciacompresion7dias(numeric)
-  RETURNS integer AS
-$BODY$	
-/**********************************************
-FECHA		: 23-03-2012
-DESCRIPCION	: BUSCA EN TODOS LOS ENSAYOS QUE PERTENECEN A UNA MUESTRA SI EXISTE ENTRE ELLOS UN ENSAYO QUE TENGA
-		  COMO NOMBRE TIPO ENSAYO = RESISTENCIA COMPRESION 28 DIAS Y VALIDA SU ESTADO
-DEVUELVE	: 1 = SI EXISTE UN ENSAYO CON NOMBRE TIPO DE ENSAYO RESISTENCIA COMPRESION 28 DIAS Y SU ESTADO ES = 'NOC'
-		  2 = SI EXISTE UN ENSAYO CON NOMBRE TIPO DE ENSAYO RESISTENCIA COMPRESION 28 DIAS Y SU ESTADO ES != 'NOC'
-		  0 = SI NO EXISTE ENSAYO CON NOMBRE TIPO DE ENSAYO RESISTENCIA COMPRESION 28 DIAS
-AUTOR		: DVQ
-**********************************************/
-
-	DECLARE 
-	resultado integer := 0;
-	estadoEnsayo character varying(3);
-	esResistencia28Dias integer := 0;
-	nombreTipoEnsayo character varying(100); 
-	
-	micursor CURSOR FOR SELECT 
-					MAE."SCMTE_NOM_TIPO_ENSA", MOV."SCMOE_COC_EST_TRA"--, MAE."SCMTE_NOM_TIPO_ENSA", MOV."SCMOE_COC_EST_TRA"
-				FROM
-					"CPSAA"."GESAC_MOV_ENSA" MOV INNER JOIN
-					"CPSAA"."GESAC_MAE_TIPO_ENSA" MAE ON
-					MOV."SCMTE_IDE_TIPO_ENSA_K" = MAE."SCMTE_IDE_TIPO_ENSA_K"
-				WHERE
-					MOV."SCMOM_IDE_MUES_K" = $1;
-
-	
-				
-	BEGIN
-		OPEN micursor;
-		LOOP			
-			FETCH NEXT IN micursor INTO nombreTipoEnsayo, estadoEnsayo;
-			EXIT WHEN NOT FOUND;
-
-			--FUNCION QUE VALIDA SI EL NOMBRETIPOENSAYO ES RESISTENCIA COMPRESION 28 DIAS (1= ES RESISTENCIA COMPRESION 28 DIAS, 0 = NO ES)
-			select nombreTipoEnsayoEsResistenciaCompresion7Dias(nombreTipoEnsayo) INTO esResistencia28Dias;
-			
-			IF(esResistencia28Dias = 1) THEN
-				IF(estadoEnsayo = 'NOC') THEN
-					resultado := 1;
-				ELSE
-					resultado := 2;
-				END IF;
-				
-				EXIT;
-			END IF;			
-		END LOOP;
-		CLOSE micursor;
-		return resultado;
-	END;
-$BODY$
-  LANGUAGE plpgsql VOLATILE
-  COST 100;
-ALTER FUNCTION existeresistenciacompresion7dias(numeric) OWNER TO postgres;
-
-
---------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
--- Function: existeresistenciacompresion14dias(numeric)
-
--- DROP FUNCTION existeresistenciacompresion14dias(numeric);
-
-CREATE OR REPLACE FUNCTION existeresistenciacompresion14dias(numeric)
-  RETURNS integer AS
-$BODY$	
-/**********************************************
-FECHA		: 23-03-2012
-DESCRIPCION	: BUSCA EN TODOS LOS ENSAYOS QUE PERTENECEN A UNA MUESTRA SI EXISTE ENTRE ELLOS UN ENSAYO QUE TENGA
-		  COMO NOMBRE TIPO ENSAYO = RESISTENCIA COMPRESION 28 DIAS Y VALIDA SU ESTADO
-DEVUELVE	: 1 = SI EXISTE UN ENSAYO CON NOMBRE TIPO DE ENSAYO RESISTENCIA COMPRESION 28 DIAS Y SU ESTADO ES = 'NOC'
-		  2 = SI EXISTE UN ENSAYO CON NOMBRE TIPO DE ENSAYO RESISTENCIA COMPRESION 28 DIAS Y SU ESTADO ES != 'NOC'
-		  0 = SI NO EXISTE ENSAYO CON NOMBRE TIPO DE ENSAYO RESISTENCIA COMPRESION 28 DIAS
-AUTOR		: DVQ
-**********************************************/
-
-	DECLARE 
-	resultado integer := 0;
-	estadoEnsayo character varying(3);
-	esResistencia28Dias integer := 0;
-	nombreTipoEnsayo character varying(100); 
-	
-	micursor CURSOR FOR SELECT 
-					MAE."SCMTE_NOM_TIPO_ENSA", MOV."SCMOE_COC_EST_TRA"--, MAE."SCMTE_NOM_TIPO_ENSA", MOV."SCMOE_COC_EST_TRA"
-				FROM
-					"CPSAA"."GESAC_MOV_ENSA" MOV INNER JOIN
-					"CPSAA"."GESAC_MAE_TIPO_ENSA" MAE ON
-					MOV."SCMTE_IDE_TIPO_ENSA_K" = MAE."SCMTE_IDE_TIPO_ENSA_K"
-				WHERE
-					MOV."SCMOM_IDE_MUES_K" = $1;
-
-	
-				
-	BEGIN
-		OPEN micursor;
-		LOOP			
-			FETCH NEXT IN micursor INTO nombreTipoEnsayo, estadoEnsayo;
-			EXIT WHEN NOT FOUND;
-
-			--FUNCION QUE VALIDA SI EL NOMBRETIPOENSAYO ES RESISTENCIA COMPRESION 28 DIAS (1= ES RESISTENCIA COMPRESION 28 DIAS, 0 = NO ES)
-			select nombreTipoEnsayoEsResistenciaCompresion14Dias(nombreTipoEnsayo) INTO esResistencia28Dias;
-			
-			IF(esResistencia28Dias = 1) THEN
-				IF(estadoEnsayo = 'NOC') THEN
-					resultado := 1;
-				ELSE
-					resultado := 2;
-				END IF;
-				
-				EXIT;
-			END IF;			
-		END LOOP;
-		CLOSE micursor;
-		return resultado;
-	END;
-$BODY$
-  LANGUAGE plpgsql VOLATILE
-  COST 100;
-ALTER FUNCTION existeresistenciacompresion14dias(numeric) OWNER TO postgres;
-
------------------------------------------------------------------------------------------------------------------------------------------------
-
-
--- Function: nombretipoensayoesresistenciacompresion28dias(character varying)
-
--- DROP FUNCTION nombretipoensayoesresistenciacompresion28dias(character varying);
-
-CREATE OR REPLACE FUNCTION nombretipoensayoesresistenciacompresion28dias(character varying)
-  RETURNS integer AS
-$BODY$
-
-/**********************************************
-FECHA		: 21-03-2012
-DESCRIPCION	: VALIDA SI EL NOMBRE TIPO ENSAYO QUE SE PASA COMO PARAMETRO CONTIENE LAS PALABRAS: RESISTENCIA, COMPRESIÓN o COMPRESION Y 28
-DEVUELVE	: 1 = SI CUMPLE 
-		  2 = NO CUMPLE		  
-AUTOR		: David Vivar Quinteros - CSTI
-**********************************************/
-
-DECLARE
-	resultado integer := 0;
-	posicion integer := 0;
-	nombreTipoEnsayo character varying(100);
-    BEGIN
-	nombreTipoEnsayo := $1;
-	
-	select position('RESISTENCIA' in upper(nombreTipoEnsayo)) into posicion;	
-	IF(posicion > 0) THEN		
-		select position('COMPRESIÓN' in upper(nombreTipoEnsayo)) into posicion;
-		IF(posicion > 0) THEN 
-			select position('28' in upper(nombreTipoEnsayo)) into posicion;
-			IF(posicion > 0) THEN
-				resultado := 1;
-			ELSE
-				resultado := 0;
-			END IF;
-		ELSE
-			select position('COMPRESION' in upper(nombreTipoEnsayo)) into posicion;	
-			IF(posicion > 0) THEN 
-				select position('28' in upper(nombreTipoEnsayo)) into posicion;
-				IF(posicion > 0) THEN
-					resultado := 1;
-				ELSE
-					resultado := 0;
-				END IF;
-			ELSE
-				resultado := 0;
-			END IF;	
-		END IF;
-		
-	ELSE
-		resultado := 0;
-	END IF;
-	
-	return resultado;
-    END;
-$BODY$
-  LANGUAGE plpgsql VOLATILE
-  COST 100;
-ALTER FUNCTION nombretipoensayoesresistenciacompresion28dias(character varying) OWNER TO postgres;
-
--------------------------------------------------------------------------------------------------------------------------------------------------------
-
--- Function: existeresistenciacompresion28dias(numeric)
-
--- DROP FUNCTION existeresistenciacompresion28dias(numeric);
-
-CREATE OR REPLACE FUNCTION existeresistenciacompresion28dias(numeric)
-  RETURNS integer AS
-$BODY$	
-/**********************************************
-FECHA		: 23-03-2012
-DESCRIPCION	: BUSCA EN TODOS LOS ENSAYOS QUE PERTENECEN A UNA MUESTRA SI EXISTE ENTRE ELLOS UN ENSAYO QUE TENGA
-		  COMO NOMBRE TIPO ENSAYO = RESISTENCIA COMPRESION 28 DIAS Y VALIDA SU ESTADO
-DEVUELVE	: 1 = SI EXISTE UN ENSAYO CON NOMBRE TIPO DE ENSAYO RESISTENCIA COMPRESION 28 DIAS Y SU ESTADO ES = 'NOC'
-		  2 = SI EXISTE UN ENSAYO CON NOMBRE TIPO DE ENSAYO RESISTENCIA COMPRESION 28 DIAS Y SU ESTADO ES != 'NOC'
-		  0 = SI NO EXISTE ENSAYO CON NOMBRE TIPO DE ENSAYO RESISTENCIA COMPRESION 28 DIAS
-AUTOR		: David Vivar Quinteros - CSTI
-**********************************************/
-
-	DECLARE 
-	resultado integer := 0;
-	estadoEnsayo character varying(3);
-	esResistencia28Dias integer := 0;
-	nombreTipoEnsayo character varying(100); 
-	
-	micursor CURSOR FOR SELECT 
-					MAE."SCMTE_NOM_TIPO_ENSA", MOV."SCMOE_COC_EST_TRA"
-					--, MAE."SCMTE_NOM_TIPO_ENSA", MOV."SCMOE_COC_EST_TRA"
-				FROM
-					"CPSAA"."GESAC_MOV_ENSA" MOV INNER JOIN
-					"CPSAA"."GESAC_MAE_TIPO_ENSA" MAE ON
-					MOV."SCMTE_IDE_TIPO_ENSA_K" = MAE."SCMTE_IDE_TIPO_ENSA_K"
-				WHERE
-					MOV."SCMOM_IDE_MUES_K" = $1;
-
-	
-				
-	BEGIN
-		OPEN micursor;
-		LOOP			
-			FETCH NEXT IN micursor INTO nombreTipoEnsayo, estadoEnsayo;
-			EXIT WHEN NOT FOUND;
-
-			--FUNCION QUE VALIDA SI EL NOMBRETIPOENSAYO ES RESISTENCIA COMPRESION 28 DIAS (1= ES RESISTENCIA COMPRESION 28 DIAS, 0 = NO ES)
-			select nombreTipoEnsayoEsResistenciaCompresion28Dias(nombreTipoEnsayo) INTO esResistencia28Dias;
-			
-			IF(esResistencia28Dias = 1) THEN
-				IF(estadoEnsayo = 'NOC') THEN
-					resultado := 1;
-				ELSIF(estadoEnsayo = 'CON') THEN
-					resultado := 2;
-				END IF;
-				
-				EXIT;
-			END IF;			
-		END LOOP;
-		CLOSE micursor;
-		return resultado;
-	END;
-$BODY$
-  LANGUAGE plpgsql VOLATILE
-  COST 100;
-ALTER FUNCTION existeresistenciacompresion28dias(numeric) OWNER TO postgres;
-
-
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -934,28 +558,28 @@ DATA HUSOS -- AUN NO HA SIDO EJECUTADA BACKUP LOCAL
 
 
 INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'A.G. chancado TMN=1/2" a 3/4" - H4','H4','A.G. chancado TMN=1/2" a 3/4" - H4','AGR','ACT');	
+                              VALUES ((SELECT nextval('"CPSAA"."GESAC_SEQ_ID_PRODUCTO"') from "CPSAA"."GESAC_SEQ_ID_PRODUCTO"),'A.G. chancado TMN=1/2" a 3/4" - H4','H4','A.G. chancado TMN=1/2" a 3/4" - H4','AGR','ACT');	
 
 INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'A.G. zarandeado TMN=1/2" a 3/4" - H4','H4','A.G. zarandeado TMN=1/2" a 3/4" - H4','AGR','ACT');
+                              VALUES ((SELECT nextval('"CPSAA"."GESAC_SEQ_ID_PRODUCTO"') from "CPSAA"."GESAC_SEQ_ID_PRODUCTO"),'A.G. zarandeado TMN=1/2" a 3/4" - H4','H4','A.G. zarandeado TMN=1/2" a 3/4" - H4','AGR','ACT');
 							  
 INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agragado fino Chancado','AF','Agragado fino Chancado','AGR','ACT');
+                              VALUES ((SELECT nextval('"CPSAA"."GESAC_SEQ_ID_PRODUCTO"') from "CPSAA"."GESAC_SEQ_ID_PRODUCTO"),'Agragado fino Chancado','AF','Agragado fino Chancado','AGR','ACT');
 							  
 INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agregado fino zarandeado','AF','Agregado fino zarandeado','AGR','ACT');							  
+                              VALUES ((SELECT nextval('"CPSAA"."GESAC_SEQ_ID_PRODUCTO"') from "CPSAA"."GESAC_SEQ_ID_PRODUCTO"),'Agregado fino zarandeado','AF','Agregado fino zarandeado','AGR','ACT');							  
 							  
 INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agragado fino Chancado M','AF','Agragado fino Chancado M','AGR','ACT');
+                              VALUES ((SELECT nextval('"CPSAA"."GESAC_SEQ_ID_PRODUCTO"') from "CPSAA"."GESAC_SEQ_ID_PRODUCTO"),'Agragado fino Chancado M','AF','Agragado fino Chancado M','AGR','ACT');
 							  
 INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST") 
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'Agregado fino zarandeado M','AF','Agregado fino zarandeado M','AGR','ACT');
+                              VALUES ((SELECT nextval('"CPSAA"."GESAC_SEQ_ID_PRODUCTO"') from "CPSAA"."GESAC_SEQ_ID_PRODUCTO"),'Agregado fino zarandeado M','AF','Agregado fino zarandeado M','AGR','ACT');
 
 INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST")  
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'AfNat M.Albañ.','AN','AfNat M.Albañ.','AGR','ACT');     
+                              VALUES ((SELECT nextval('"CPSAA"."GESAC_SEQ_ID_PRODUCTO"') from "CPSAA"."GESAC_SEQ_ID_PRODUCTO"),'AfNat M.Albañ.','AN','AfNat M.Albañ.','AGR','ACT');     
  
 INSERT INTO "CPSAA"."GESAC_MAE_PROD" ("SCMPR_IDE_PROD_K","SCMPR_NOM_PROD","SCMPR_GLS_SIG","SCMPR_GLS_DES","SCMPR_COC_TIP_PROD","SCMPR_COC_EST")  
-                              VALUES ((SELECT MAX("SCMPR_IDE_PROD_K")+1 FROM "CPSAA"."GESAC_MAE_PROD"),'AfMan M.Albañ.','AM','AfMan M.Albañ.','AGR','ACT');
+                              VALUES ((SELECT nextval('"CPSAA"."GESAC_SEQ_ID_PRODUCTO"') from "CPSAA"."GESAC_SEQ_ID_PRODUCTO"),'AfMan M.Albañ.','AM','AfMan M.Albañ.','AGR','ACT');
 
 UPDATE "CPSAA"."GESAC_MAE_PROD" SET "SCMPR_NOM_PROD"='A.G. chancado TMN=1 1/2" a No. 4 - H467' WHERE "SCMPR_NOM_PROD"='A.G. chancado TMN=1 1/2 a No. 4 - H467';
 
@@ -992,7 +616,7 @@ DECLARE
   
 
    IF countMatr_Trat = 0  THEN
-        SELECT MAX("SCMMT_IDE_MATR_TRAT_K")+1 FROM "CPSAA"."GESAC_MAE_MATR_TRAT" INTO idMatr;      
+        SELECT nextval('"CPSAA"."GESAC_SEQ_ID_MATRIZT"') from "CPSAA"."GESAC_SEQ_ID_MATRIZT" INTO idMatr;      
         INSERT INTO "CPSAA"."GESAC_MAE_MATR_TRAT" ("SCMMT_IDE_MATR_TRAT_K","SCMPC_IDE_PROC_K","SCMPR_IDE_PROD_K",
                                                   "SCMMT_NOM_MATR_TRAT","SCMMT_GLS_DES","SCMGT_FLG_RES","SCMMT_COC_EST")  VALUES 
                                                   (idMatr,$1,$3,(SELECT "SCMPR_NOM_PROD" FROM "CPSAA"."GESAC_MAE_PROD" 
@@ -1009,7 +633,7 @@ DECLARE
 
     IF countGrupTip = 0 THEN
                                                           
-     SELECT MAX("SCMGT_IDE_GRUP_TIPO_ENSA_K")+1 FROM  "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" INTO idGrupTip;  
+     SELECT nextval('"CPSAA"."GESAC_SEQ_ID_GRUPOTE"') from "CPSAA"."GESAC_SEQ_ID_GRUPOTE" INTO idGrupTip;  
      INSERT INTO "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" ("SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMMT_IDE_MATR_TRAT_K","SCMGT_NOM_GRUP_TIPO_ENSA",
 				  	            "SCMGT_COC_CAT_TIPO_ENSA","SCMGT_COC_HUS","SCMGT_COC_EST","SCMGT_COC_TIPO_GRUP_TIPO_ENSA","SCMGT_FLG_HUS_GRA")  VALUES
 					            (idGrupTip,idMatr,'Análisis Granulométrico','FIS',$4,'ACT','GRA','S');
@@ -1020,7 +644,7 @@ DECLARE
 
 
 
-	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+	SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
 	"SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1037,7 +661,7 @@ DECLARE
 
 
 											 
-	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+	SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
 	"SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1050,7 +674,7 @@ DECLARE
                                              idTipoEnsa,'N','N','S','N','CON',$21,$8);											 
 									 
 											 
-	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+	SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
 	"SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1063,7 +687,7 @@ DECLARE
                                              idTipoEnsa,'N','N','S','N','CON',$22,$9);
 	
 
-	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+	SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
 	"SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1075,7 +699,7 @@ DECLARE
                                              ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
                                              idTipoEnsa,'N','N','S','N','CON',$23,$10);
 
-	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+	SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
 	"SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1088,7 +712,7 @@ DECLARE
                                              idTipoEnsa,'N','N','S','N','CON',$24,$11);
 
                                
-	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+	SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
 	"SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1102,7 +726,7 @@ DECLARE
                                              idTipoEnsa,'N','N','S','N','CON',$25,$12);
 
                                
-        SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+      SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
 	"SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1116,7 +740,7 @@ DECLARE
                                              idTipoEnsa,'N','N','S','N','CON',$26,$13);
 
                                   
-	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+	SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
 	"SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1129,7 +753,7 @@ DECLARE
                                              idTipoEnsa,'N','N','S','N','CON',$27,$14);
 
                             
-	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+	SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
 	"SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1142,7 +766,7 @@ DECLARE
                                              idTipoEnsa,'N','N','S','N','CON',$28,$15);
 
                                  
-	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+	SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
 	"SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1155,7 +779,7 @@ DECLARE
                                              idTipoEnsa,'N','N','S','N','CON',$29,$16);
 
                                  
-	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+	SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
 	"SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1168,7 +792,7 @@ DECLARE
                                              idTipoEnsa,'N','N','S','N','CON',$30,$17);
 
                              
-	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+	SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
 	"SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1181,7 +805,7 @@ DECLARE
                                              idTipoEnsa,'N','N','S','N','CON',$31,$18);
 
                             
-	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+	SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
 	"SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1193,7 +817,7 @@ DECLARE
                                              ((SELECT MAX("SCMOC_IDE_CONT_K")+1 FROM "CPSAA"."GESAC_MOV_CONT"),
                                              idTipoEnsa,'N','N','S','N','CON',$32,$19);
                         
-	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+	SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
 	"SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1206,7 +830,7 @@ DECLARE
                                              idTipoEnsa,'N','N','S','N','CON',0,0);
 
                                              
-	SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+	SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
 	INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
 	"SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
 	"SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1222,7 +846,7 @@ DECLARE
   
 
    IF countMatr_Trat = 0  THEN
-          SELECT MAX("SCMMT_IDE_MATR_TRAT_K")+1 FROM "CPSAA"."GESAC_MAE_MATR_TRAT" INTO idMatr;                                                          
+          SELECT nextval('"CPSAA"."GESAC_SEQ_ID_MATRIZT"') from "CPSAA"."GESAC_SEQ_ID_MATRIZT" INTO idMatr;                                                          
                   INSERT INTO "CPSAA"."GESAC_MAE_MATR_TRAT" ("SCMMT_IDE_MATR_TRAT_K","SCMPC_IDE_PROC_K","SCMPR_IDE_PROD_K",
                                                              "SCMMT_NOM_MATR_TRAT","SCMMT_GLS_DES","SCMGT_FLG_RES","SCMMT_COC_EST")  VALUES 
                                                              (idMatr,$2,$3,(SELECT "SCMPR_NOM_PROD" 
@@ -1248,7 +872,7 @@ DECLARE
 
     IF countGrupTip =0 THEN
                                                           
-     SELECT MAX("SCMGT_IDE_GRUP_TIPO_ENSA_K")+1 FROM  "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" INTO idGrupTip;  
+     SELECT nextval('"CPSAA"."GESAC_SEQ_ID_GRUPOTE"') from "CPSAA"."GESAC_SEQ_ID_GRUPOTE" INTO idGrupTip;  
      INSERT INTO "CPSAA"."GESAC_MAE_GRUP_TIPO_ENSA" ("SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMMT_IDE_MATR_TRAT_K","SCMGT_NOM_GRUP_TIPO_ENSA",
 				  	            "SCMGT_COC_CAT_TIPO_ENSA","SCMGT_COC_HUS","SCMGT_COC_EST","SCMGT_COC_TIPO_GRUP_TIPO_ENSA","SCMGT_FLG_HUS_GRA")  VALUES
 					            (idGrupTip,idMatr,'Análisis Granulométrico','FIS',$4,'ACT','GRA','S');
@@ -1263,7 +887,7 @@ DECLARE
 
 					  
 
-  SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+  SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
   "SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1276,7 +900,7 @@ DECLARE
 				     idTipoEnsa,'N','N','S','N','CON',$46,$33);
 
                                    
-  SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+  SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
   "SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1289,7 +913,7 @@ DECLARE
 				     idTipoEnsa,'N','N','S','N','CON',$47,$34);
 
                                      
-  SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+  SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
   "SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1302,7 +926,7 @@ DECLARE
 				     idTipoEnsa,'N','N','S','N','CON',$48,$35);
 
                                
-  SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+  SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
   "SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1315,7 +939,7 @@ DECLARE
 				     idTipoEnsa,'N','N','S','N','CON',$49,$36);
 
                                       
-  SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+  SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
   "SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1328,7 +952,7 @@ DECLARE
 				     idTipoEnsa,'N','N','S','N','CON',$50,$37);
 
                                       
-  SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+  SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
   "SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1341,7 +965,7 @@ DECLARE
 				     idTipoEnsa,'N','N','S','N','CON',$51,$38);
 
                                       
-   SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+  SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
   "SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1354,7 +978,7 @@ DECLARE
 				     idTipoEnsa,'N','N','S','N','CON',$52,$39);
 
                                          
-  SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+  SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
   "SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1367,7 +991,7 @@ DECLARE
 				     idTipoEnsa,'N','N','S','N','CON',$53,$40);
 
                                       
-  SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+  SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
   "SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1380,7 +1004,7 @@ DECLARE
 				     idTipoEnsa,'N','N','S','N','CON',$54,$41);
 
                                         
-  SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+  SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
   "SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1393,7 +1017,7 @@ DECLARE
 				     idTipoEnsa,'N','N','S','N','CON',$55,$42);
 
                                         
-  SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+  SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
   "SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1406,7 +1030,7 @@ DECLARE
 				     idTipoEnsa,'N','N','S','N','CON',$56,$43);
 
                                            
-  SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+  SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
   "SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1419,7 +1043,7 @@ DECLARE
 				     idTipoEnsa,'N','N','S','N','CON',$57,$44);
 
                                          
-  SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+  SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
   "SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1432,7 +1056,7 @@ DECLARE
 				     idTipoEnsa,'N','N','S','N','CON',$58,$45);
 
                                  
-  SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+  SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
   "SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
@@ -1445,7 +1069,7 @@ DECLARE
 				     idTipoEnsa,'N','N','S','N','CON',0,0);
 
 
-  SELECT MAX("SCMTE_IDE_TIPO_ENSA_K")+1 FROM "CPSAA"."GESAC_MAE_TIPO_ENSA" INTO idTipoEnsa;
+  SELECT nextval('"CPSAA"."GESAC_SEQ_ID_TIPOENSAYO"') from "CPSAA"."GESAC_SEQ_ID_TIPOENSAYO" INTO idTipoEnsa;
   INSERT INTO "CPSAA"."GESAC_MAE_TIPO_ENSA" ("SCMTE_IDE_TIPO_ENSA_K","SCMGT_IDE_GRUP_TIPO_ENSA_K","SCMTE_NRO_ORD","SCMTE_NOM_TIPO_ENSA",
   "SCMTE_GLS_DES","SCMTE_FLG_UNI_MUE","SCMTE_NRO_UNI_MUE","SCMTE_FLG_NRO_AMB_ACU","SCMTE_FLG_VAL_ACE","SCMTE_COC_UNI_MED","SCMTE_GLS_RES",
   "SCMTE_FLG_MOD_FIN","SCMTE_FLG_FOR_MOD_FIN","SCMTE_FLG_LTE_NO_CON","SCMTE_FLG_LTE_CON","SCMTE_FLG_ESC_PROC","SCMTE_FLG_ESC_PLAN",
